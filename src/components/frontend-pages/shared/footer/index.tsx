@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Box,
   Typography,
@@ -9,12 +8,11 @@ import {
   IconButton,
   Grid2 as Grid,
 } from '@mui/material';
-import { Link, NavLink } from 'react-router';
+import { NavLink } from 'react-router';
 
 import IconFacebook from 'src/assets/images/frontend-pages/icons/icon-facebook.svg';
 import IconTwitter from 'src/assets/images/frontend-pages/icons/icon-twitter.svg';
 import IconInstagram from 'src/assets/images/frontend-pages/icons/icon-instagram.svg';
-import LogoIcon from 'src/assets/images/logos/logoIcon.svg';
 
 const footerLinks = [
   {
@@ -95,8 +93,8 @@ const Footer = () => {
                 ) : (
                   <Typography
                     key={i}
-                    component={Link}
-                    to={child.link}
+                    component="a"
+                    href={child.link}
                     sx={{
                       display: 'block',
                       fontSize: '15px',
@@ -112,7 +110,7 @@ const Footer = () => {
                   >
                     {child.titleText}
                   </Typography>
-                )
+                ),
               )}
             </Grid>
           ))}
@@ -122,12 +120,7 @@ const Footer = () => {
             size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
             sx={{ textAlign: { xs: 'center', md: 'left' } }}
           >
-            <Typography
-              fontSize="18px"
-              fontWeight="700"
-              mb="20px"
-              color="text.primary"
-            >
+            <Typography fontSize="18px" fontWeight="700" mb="20px" color="text.primary">
               Follow Us
             </Typography>
             <Stack direction="row" spacing={2} justifyContent={{ xs: 'center', md: 'flex-start' }}>
@@ -163,7 +156,7 @@ const Footer = () => {
         <Divider sx={{ mb: 4 }} />
 
         {/* Bottom Bar */}
-      {/*   <Box
+        {/*   <Box
           py={2}
           display="flex"
           flexDirection={{ xs: 'column', sm: 'row' }}

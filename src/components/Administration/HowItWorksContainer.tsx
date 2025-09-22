@@ -1,5 +1,5 @@
-import { Box, Container, Grid } from '@mui/system';
-import HowItWorks from './howItWorks';
+import { Box, Container } from '@mui/system';
+import HowItWorks from './HowItWorks';
 
 function HowItWorksContainer() {
   return (

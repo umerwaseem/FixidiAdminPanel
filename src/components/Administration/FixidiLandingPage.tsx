@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import {
   Box,
-  Stack,
+
   Typography,
   /*  AvatarGroup,
   Avatar, */
   Container,
   Grid2 as Grid,
-  useTheme,
+/*   useTheme, */
   Autocomplete,
 } from '@mui/material';
 import AnimationFadeIn from '../landingpage/animation/Animation';
@@ -25,9 +25,7 @@ import icon9 from 'src/assets/images/FixidiIcons/smokeDetector.svg';
 import icon10 from 'src/assets/images/FixidiIcons/gutterCleaning.svg';
 import icon11 from 'src/assets/images/FixidiIcons/gardening-machinery-svgrepo-com.svg';
 import icon12 from 'src/assets/images/FixidiIcons/lights.svg';
-/* import user1 from 'src/assets/images/profile/user-1.jpg';
-import user2 from 'src/assets/images/profile/user-2.jpg';
-import user3 from 'src/assets/images/profile/user-3.jpg'; */
+
 
 import houseServices from '../forms/form-elements/autoComplete/data';
 import CustomTextField from '../forms/theme-elements/CustomTextField';
@@ -36,23 +34,11 @@ import HpHeader from '../frontend-pages/shared/header/HpHeader';
 import Footer from 'src/components/frontend-pages/shared/footer';
 import ScrollToTop from '../frontend-pages/shared/scroll-to-top';
 import { useNavigate } from 'react-router';
-/* import BannerTopLeft from 'src/assets/images/frontend-pages/homepage/banner-top-left.svg'; */
-import BannerBottomPart from 'src/assets/images/frontend-pages/homepage/bottom-part.svg';
-/* import BannerTopRight from 'src/assets/images/frontend-pages/homepage/banner-top-right.svg'; */
-import { useMediaQuery } from '@mui/system';
-import { Reviews } from '@mui/icons-material';
-import DefendFocus from '../frontend-pages/homepage/defend-focus';
-import ExceptionalFeature from '../frontend-pages/homepage/exceptional-feature';
-import FAQ from '../frontend-pages/homepage/faq';
-import PowerfulDozens from '../frontend-pages/homepage/powerful-dozens';
-import C2a from '../frontend-pages/shared/c2a';
-import Leadership from '../frontend-pages/shared/leadership';
-import Pricing from '../frontend-pages/shared/pricing';
-import Features from 'src/components/frontend-pages/homepage/features/Features';
+
+/* import { useMediaQuery } from '@mui/system'; */
 
 import FeaturesTitle from '../landingpage/features/FeaturesTitle';
-import TabWorkflows from '../frontend-pages/homepage/defend-focus/TabWorkflows';
-import HowItWorks from './howItWorks';
+
 import MobileAppSection from './MobileAppSection';
 import HowItWorksContainer from './HowItWorksContainer';
 
@@ -133,10 +119,10 @@ const Frameworks = [
   /////////////
 ];
 const FixidiLandingPage = () => {
-  const theme = useTheme();
+/*   const theme = useTheme(); */
   const navigate = useNavigate();
   const [, setSelectedService] = useState<string | null>(null);
-  const lgUp = useMediaQuery(theme.breakpoints.up('lg'));
+/*   const lgUp = useMediaQuery(theme.breakpoints.up('lg')); */
   const handleButtonClick = (fwName: string, userType: 'client' | 'professional') => {
     if (fwName === 'More') {
       navigate('/all-services');
