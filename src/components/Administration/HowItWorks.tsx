@@ -1,12 +1,4 @@
-import {
-  Box,
-  Typography,
-  CardContent,
-  Divider,
-  Stack,
-  Avatar,
-  Container,
-} from '@mui/material';
+import { Box, Typography, CardContent, Divider, Stack, Avatar, Container } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 import BlankCard from '../shared/BlankCard';
@@ -19,12 +11,7 @@ const howItworksClient = [
   {
     id: 1,
     type: 'Customer',
-    steps: [
-      'Find Your Helper',
-      'Book Instantly',
-      'Get It Done',
-      'Pay & Review Easily',
-    ],
+    steps: ['Find Your Helper', 'Book Instantly', 'Get It Done', 'Pay & Review Easily'],
   },
 ];
 
@@ -48,9 +35,10 @@ function HowItWorks() {
     <Container
       sx={{
         maxWidth: '1400px !important',
-        py: { xs: 6, md: 2 },
+        py: { xs: 6 },
         textAlign: 'center',
-        overflowX: 'hidden', 
+        overflowX: 'hidden',
+        overflowY: 'hidden',
       }}
     >
       {/* Section Title */}
@@ -80,7 +68,7 @@ function HowItWorks() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}
         >
           {/* Image */}
           <Box
@@ -116,12 +104,7 @@ function HowItWorks() {
               }}
             >
               <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-                <Typography
-                  variant="h5"
-                  fontWeight={700}
-                  mb={2}
-                  color={theme.palette.primary.main}
-                >
+                <Typography variant="h5" fontWeight={700} mb={2} color={theme.palette.primary.main}>
                   {howItworksClient[0].type}
                 </Typography>
                 <Divider sx={{ mb: 3 }} />
@@ -132,7 +115,7 @@ function HowItWorks() {
                       display="flex"
                       alignItems="center"
                       gap="12px"
-                      justifyContent={{ xs: 'center', md: 'flex-start' }}
+                      justifyContent="flex-start"
                     >
                       <Avatar
                         sx={{
@@ -145,7 +128,17 @@ function HowItWorks() {
                       >
                         {idx + 1}
                       </Avatar>
-                      <Typography fontSize="15px" fontWeight={600}>
+                      <Typography
+                        fontSize={{ xs: '13px', sm: '14px', md: '15px' }} // responsive smaller font on mobile
+                        fontWeight={600}
+                        noWrap // 👈 prevents breaking into multiple lines
+                        sx={{
+                          textOverflow: 'ellipsis',
+                          overflow: 'hidden',
+                          whiteSpace: 'nowrap',
+                          maxWidth: { xs: '200px', sm: '240px', md: '280px' }, // adjust as needed
+                        }}
+                      >
                         {step}
                       </Typography>
                     </Box>
@@ -165,7 +158,7 @@ function HowItWorks() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.3, delay: 0.1 }}
         >
           {/* Image */}
           <Box
@@ -217,7 +210,7 @@ function HowItWorks() {
                       display="flex"
                       alignItems="center"
                       gap="12px"
-                      justifyContent={{ xs: 'center', md: 'flex-start' }}
+                      justifyContent="flex-start"
                     >
                       <Avatar
                         sx={{
@@ -230,7 +223,17 @@ function HowItWorks() {
                       >
                         {idx + 1}
                       </Avatar>
-                      <Typography fontSize="15px" fontWeight={600}>
+                      <Typography
+                        fontSize={{ xs: '13px', sm: '14px', md: '15px' }} // responsive smaller font on mobile
+                        fontWeight={600}
+                        noWrap // 👈 prevents breaking into multiple lines
+                        sx={{
+                          textOverflow: 'ellipsis',
+                          overflow: 'hidden',
+                          whiteSpace: 'nowrap',
+                          maxWidth: { xs: '200px', sm: '240px', md: '280px' }, // adjust as needed
+                        }}
+                      >
                         {step}
                       </Typography>
                     </Box>

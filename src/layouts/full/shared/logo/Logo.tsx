@@ -15,7 +15,7 @@ import { ReactComponent as LogoLight } from 'src/assets/images/logos/light-logo.
 import { ReactComponent as LogoLightRTL } from 'src/assets/images/logos/light-logo-rtl.svg';
 import { styled } from '@mui/material';
 import { AppState } from 'src/store/Store';
-import { ReactComponent as FixidiLogo } from 'src/components/Administration/logo (1) (1).svg';
+import { ReactComponent as FixidiLogo } from 'src/components/Administration/logo 1 (1).svg';
 
 const Logo: FC = () => {
   const customizer = useSelector((state: AppState) => state.customizer);

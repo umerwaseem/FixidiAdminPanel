@@ -1,24 +1,23 @@
-import { Typography } from '@mui/material';
 import { Box, Container, Grid } from '@mui/system';
-import React from 'react'
-
 import HowItWorks from './howItWorks';
 
 function HowItWorksContainer() {
-
-      return (<>
-    <Box
-      sx={{
-        py: {
-          xs: 5,
-          lg: 11,
-        },
-      }}
-    >
-      <Container sx={{
-        maxWidth: '1400px !important'
-      }}>
-      {/*   <Grid container spacing={3} alignItems="center" justifyContent="center">
+  return (
+    <>
+      <Box
+        sx={{
+          py: {
+            xs: 5,
+            lg: 3,
+          },
+        }}
+      >
+        <Container
+          sx={{
+            maxWidth: '1400px !important',
+          }}
+        >
+          {/*   <Grid container spacing={3} alignItems="center" justifyContent="center">
           <Grid
             size={{
               xs: 12,
@@ -42,13 +41,13 @@ function HowItWorksContainer() {
           </Grid>
         </Grid> */}
 
-        <HowItWorks />
+          <HowItWorks />
 
-        {/* <PaymentMethods /> */}
-      </Container>
-    </Box>
-  </>);
-  
+          {/* <PaymentMethods /> */}
+        </Container>
+      </Box>
+    </>
+  );
 }
 
-export default HowItWorksContainer
+export default HowItWorksContainer;
