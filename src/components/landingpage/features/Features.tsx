@@ -3,7 +3,7 @@
 import React from 'react';
 import FeaturesTitle from './FeaturesTitle';
 import { Typography, Grid2 as Grid, Container, Box } from '@mui/material';
-import {
+/* import {
   IconAdjustments,
   IconArchive,
   IconArrowsShuffle,
@@ -22,7 +22,7 @@ import {
   IconWand,
   IconTable,
   IconPresentation,
-} from '@tabler/icons-react';
+} from '@tabler/icons-react'; */
 import AnimationFadeIn from '../animation/Animation';
 
 import icon1 from 'src/assets/images/FixidiIcons/generalHandyman.svg';

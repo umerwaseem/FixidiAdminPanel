@@ -2,7 +2,7 @@ import { Box, Grid2 as Grid, Typography, Container } from '@mui/material';
 import 'slick-carousel/slick/slick.css';
 
 import LeaderShipCarousel from './LeaderShipCarousel';
-import Contact from './Contact';
+
 
 const Leadership = () => {
   return (<>
