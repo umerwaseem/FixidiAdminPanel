@@ -559,7 +559,7 @@ const Menuitems = [
         id: uniqueId(),
         title: 'Landing Page',
         icon: IconSettings,
-        href: '/FixidiLandingPage',
+        href: '/',
       },
     ],
   },

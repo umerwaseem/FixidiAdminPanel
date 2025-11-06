@@ -32,13 +32,14 @@ function HowItWorks() {
   const theme = useTheme();
 
   return (
-    <Container
+    <Container 
       sx={{
         maxWidth: '1400px !important',
         py: { xs: 6 },
         textAlign: 'center',
         overflowX: 'hidden',
         overflowY: 'hidden',
+        
       }}
     >
       {/* Section Title */}
@@ -86,9 +87,10 @@ function HowItWorks() {
           {/* Card */}
           <Box
             sx={{
-              position: { xs: 'relative', md: 'absolute' },
+                opacity: { xs: 1, md: 0.75 },
+             position: { xs: 'relative', md: 'absolute' },
               top: { xs: 'auto', md: '50%' },
-              left: { xs: 'auto', md: '-12%' },
+              left: { xs: 'auto', md: '-5%' },
               transform: { xs: 'none', md: 'translateY(-50%)' },
               width: { xs: '95%', sm: '85%', md: 300, lg: 340 },
               mx: { xs: 'auto', md: 0 },
@@ -151,6 +153,7 @@ function HowItWorks() {
 
         {/* RIGHT SIDE (Professional) */}
         <Box
+        
           position="relative"
           flex={1}
           sx={{ mx: { xs: 0, md: 2 } }}
@@ -165,6 +168,7 @@ function HowItWorks() {
             borderRadius="24px"
             overflow="hidden"
             sx={{
+              
               height: { xs: 300, sm: 360, md: 420, lg: 460 },
               backgroundImage: `url(${professionalBg})`,
               backgroundSize: 'cover',
@@ -176,9 +180,10 @@ function HowItWorks() {
           {/* Card */}
           <Box
             sx={{
+                     opacity: { xs: 1, md: 0.75 },
               position: { xs: 'relative', md: 'absolute' },
               top: { xs: 'auto', md: '50%' },
-              right: { xs: 'auto', md: '-12%' },
+              right: { xs: 'auto', md: '-5%' },
               transform: { xs: 'none', md: 'translateY(-50%)' },
               width: { xs: '95%', sm: '85%', md: 300, lg: 340 },
               mx: { xs: 'auto', md: 0 },

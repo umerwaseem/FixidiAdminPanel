@@ -11,7 +11,7 @@ type HpHeaderProps = {
 };
 
 const MobileSidebar: React.FC<HpHeaderProps> = ({  showProfessionalButton }) =>  {
-  const showButton = showProfessionalButton ?? location.pathname === '/FixidiLandingPage';
+  const showButton = showProfessionalButton ?? location.pathname === '/';
     const navigate = useNavigate();
  const onProfessionalClickk = () => {
     navigate('/user-registration', { state: { userType: 'professional' } });

@@ -910,7 +910,7 @@ if (maxRate - minRate < 25) {
                           autoHideDuration={5000}
                           onClose={() => {
                             setOpenAlert(false);
-                              navigate('/FixidiLandingPage');
+                              navigate('/');
                           }}
                     
                         >

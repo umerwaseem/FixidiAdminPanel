@@ -17,7 +17,7 @@ const FixidiLogo: FC = () => {
   if (customizer.activeDir === 'ltr') {
     return (
       <LinkStyled
-        to="/FixidiLandingPage"
+        to="/"
         style={{
           display: 'flex',
           alignItems: 'center',

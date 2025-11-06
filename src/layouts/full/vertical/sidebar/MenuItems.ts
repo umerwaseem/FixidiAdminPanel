@@ -1015,7 +1015,7 @@ const Menuitems: MenuitemsType[] = [
     id: uniqueId(),
     title: 'Landing Page',
     icon: IconSettings,
-    href: '/FixidiLandingPage',
+    href: '/',
   },
 ];
 

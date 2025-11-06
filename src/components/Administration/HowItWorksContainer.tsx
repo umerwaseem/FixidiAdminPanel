@@ -4,7 +4,7 @@ import HowItWorks from './HowItWorks';
 function HowItWorksContainer() {
   return (
     <>
-      <Box
+      <Box bgcolor="primary.light"
         sx={{
           py: {
             xs: 5,

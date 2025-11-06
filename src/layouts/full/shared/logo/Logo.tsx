@@ -15,50 +15,46 @@ import { ReactComponent as LogoLight } from 'src/assets/images/logos/light-logo.
 import { ReactComponent as LogoLightRTL } from 'src/assets/images/logos/light-logo-rtl.svg';
 import { styled } from '@mui/material';
 import { AppState } from 'src/store/Store';
-import { ReactComponent as FixidiLogo } from 'src/components/Administration/logo 1 (1).svg';
+import { ReactComponent as FixidiLogo } from 'src/components/Administration/fixidi logo svg 1 (1).svg';
 
 const Logo: FC = () => {
   const customizer = useSelector((state: AppState) => state.customizer);
+
   const LinkStyled = styled(Link)(() => ({
     height: customizer.TopbarHeight,
-    width: customizer.isCollapse ? '40px' : '180px',
+    width: customizer.isCollapse ? '60px' : '220px', // increased width
     overflow: 'hidden',
-    display: 'block',
+    display: 'flex',
+    alignItems: 'center',
   }));
+
+  const logoStyle = {
+    width: customizer.isCollapse ? '40px' : '180px', // control image size
+    height: '40px', // maintain aspect ratio
+  };
 
   if (customizer.activeDir === 'ltr') {
     return (
-      <LinkStyled
-        to="/FixidiLandingPage"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
+      <LinkStyled to="/">
         {customizer.activeMode === 'dark' ? (
-          <LogoLight />
+          <LogoLight  style={logoStyle} />
         ) : (
-          <FixidiLogo />
+          <FixidiLogo  style={logoStyle} />
         )}
       </LinkStyled>
     );
   }
 
   return (
-    <LinkStyled
-      to="/"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
+    <LinkStyled to="/">
       {customizer.activeMode === 'dark' ? (
-        <LogoDarkRTL />
+        <LogoDarkRTL  style={logoStyle} />
       ) : (
-        <LogoLightRTL />
+        <LogoLightRTL  style={logoStyle} />
       )}
     </LinkStyled>
   );
 };
+
 
 export default Logo;

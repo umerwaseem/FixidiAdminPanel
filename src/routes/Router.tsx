@@ -296,16 +296,19 @@ const router = createBrowserRouter ([
        
     ],
   }, */
-  {
+ /*  {
   path: '/',
   element: <Navigate to="/FixidiLandingPage" />,
   children: [
     { path: '*', element: <Navigate to="/auth/404" /> }
   ]
-},
+}, */
 {
-  path: '/FixidiLandingPage',
-  element: <FixidiLandingPage />
+    path: '/',
+  element: <FixidiLandingPage />,
+  children: [
+    { path: '*', element: <Navigate to="/auth/404" /> }
+  ]
 },
 /* {
   path: '/auth/login',
@@ -318,7 +321,11 @@ const router = createBrowserRouter ([
 {
   path: '/all-services',
   element: <AllServices />
-}
+},
+ {
+    path: '*',
+    element: <Navigate to="/" replace />, // redirect unknown routes to home
+  },
 ]);
 //const router = createBrowserRouter(Router);
 

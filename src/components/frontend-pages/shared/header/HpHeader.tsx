@@ -22,7 +22,7 @@ const HpHeader: React.FC<HpHeaderProps> = ({ onProfessionalClick, showProfession
   const location = useLocation();
 
   // const showButton = location.pathname === '/FixidiLandingPage';
-  const showButton = showProfessionalButton ?? location.pathname === '/FixidiLandingPage';
+  const showButton = showProfessionalButton ?? location.pathname === '/';
   const AppBarStyled = styled(AppBar)(({ theme }) => ({
     justifyContent: 'center',
     [theme.breakpoints.up('lg')]: {
@@ -87,7 +87,7 @@ const HpHeader: React.FC<HpHeaderProps> = ({ onProfessionalClick, showProfession
         </ToolbarStyled>
       </Container>
       <Drawer
-        anchor="left"
+        anchor="right"
         open={open}
         variant="temporary"
         onClose={toggleDrawer(false)}

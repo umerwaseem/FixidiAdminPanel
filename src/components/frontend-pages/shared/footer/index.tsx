@@ -36,8 +36,8 @@ const footerLinks = [
       { title: true, titleText: 'Quick Links' },
       { title: false, titleText: 'Home', link: '#' },
       { title: false, titleText: 'Services', link: '#' },
-      { title: false, titleText: 'Blog', link: '#' },
-      { title: false, titleText: 'Invoice', link: '#' },
+      /* { title: false, titleText: 'Blog', link: '#' },
+      { title: false, titleText: 'Invoice', link: '#' }, */
       { title: false, titleText: 'FAQ', link: '#' },
     ],
   },
@@ -125,8 +125,8 @@ const Footer = () => {
             </Typography>
             <Stack direction="row" spacing={2} justifyContent={{ xs: 'center', md: 'flex-start' }}>
               {[
-                { icon: IconFacebook, label: 'Facebook' },
-                { icon: IconTwitter, label: 'Twitter' },
+               /*  { icon: IconFacebook, label: 'Facebook' },
+                { icon: IconTwitter, label: 'Twitter' }, */
                 { icon: IconInstagram, label: 'Instagram' },
               ].map((social, idx) => (
                 <Tooltip title={social.label} key={idx}>

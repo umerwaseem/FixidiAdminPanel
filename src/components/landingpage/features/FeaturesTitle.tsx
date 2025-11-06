@@ -51,6 +51,7 @@ const FeaturesTitle = () => {
                       fontWeight={700}
                       lineHeight="1.1"
                       sx={{
+                         fontFamily: '"Poppins", "Inter", "Segoe UI", sans-serif',
                         fontSize: {
                           xs: '40px',
                           sm: '56px',
@@ -58,10 +59,11 @@ const FeaturesTitle = () => {
                         mb: 2,
                       }}
                     >
-                      Fixing lives with{' '}
+                      Easiest way to find help{' '}
                       <Typography
                         variant="h1"
                         sx={{
+                           fontFamily: '"Poppins", "Inter", "Segoe UI", sans-serif',
                           fontSize: {
                             xs: '40px',
                             sm: '56px',
@@ -71,7 +73,7 @@ const FeaturesTitle = () => {
                         component="span"
                         color="primary.main"
                       >
-                       neighbourly care
+                       within your neighbourhood
                       </Typography>{' '}
                       
                     </Typography>
