@@ -36,9 +36,7 @@ const footerLinks = [
       { title: true, titleText: 'Quick Links' },
       { title: false, titleText: 'Home', link: '#' },
       { title: false, titleText: 'Services', link: '#' },
-      /* { title: false, titleText: 'Blog', link: '#' },
-      { title: false, titleText: 'Invoice', link: '#' }, */
-      { title: false, titleText: 'FAQ', link: '#' },
+   //   { title: false, titleText: 'FAQ', link: '#' },
     ],
   },
   {
@@ -57,12 +55,26 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        background: (theme) =>
-          theme.palette.mode === 'dark'
-            ? theme.palette.grey[900]
-            : 'linear-gradient(180deg, #f9f9fb 0%, #ffffff 100%)',
+        background: 'linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%)',
         color: 'text.secondary',
         mt: 8,
+        position: 'relative',
+        overflow: 'hidden',
+       /*  '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '4px',
+          background: 'linear-gradient(90deg, #1a97f5 0%, #26c6da 50%, #1a97f5 100%)',
+          backgroundSize: '200% 100%',
+          animation: 'shimmer 3s ease-in-out infinite',
+        }, */
+        '@keyframes shimmer': {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
       }}
     >
       <Container
@@ -72,6 +84,7 @@ const Footer = () => {
           pb: { xs: 4, md: 6 },
         }}
       >
+        {/* Main Footer Content */}
         <Grid container spacing={5} justifyContent="space-between" mb={6}>
           {footerLinks.map((section) => (
             <Grid
@@ -85,8 +98,22 @@ const Footer = () => {
                     key={i}
                     fontSize="18px"
                     fontWeight="700"
-                    mb="20px"
+                    mb={3}
                     color="text.primary"
+                    sx={{
+                      position: 'relative',
+                      display: 'inline-block',
+                      '&::after': {
+                        content: '""',
+                        position: 'absolute',
+                        bottom: '-8px',
+                        left: 0,
+                        width: '40px',
+                        height: '3px',
+                        background: 'linear-gradient(90deg, #1a97f5 0%, #26c6da 100%)',
+                        borderRadius: '2px',
+                      },
+                    }}
                   >
                     {child.titleText}
                   </Typography>
@@ -98,13 +125,27 @@ const Footer = () => {
                     sx={{
                       display: 'block',
                       fontSize: '15px',
-                      lineHeight: 1.8,
+                      lineHeight: 2,
                       color: 'text.secondary',
                       textDecoration: 'none',
-                      transition: 'all 0.3s ease',
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      position: 'relative',
+                      paddingLeft: { xs: 0, md: '12px' },
+                      '&::before': {
+                        content: '"→"',
+                        position: 'absolute',
+                        left: 0,
+                        opacity: 0,
+                        transition: 'opacity 0.3s ease',
+                        color: 'primary.main',
+                        display: { xs: 'none', md: 'block' },
+                      },
                       '&:hover': {
                         color: 'primary.main',
-                        pl: 0.5,
+                        paddingLeft: { md: '20px' },
+                        '&::before': {
+                          opacity: 1,
+                        },
                       },
                     }}
                   >
@@ -115,73 +156,85 @@ const Footer = () => {
             </Grid>
           ))}
 
-          {/* Social Icons */}
+          {/* Social Icons - Enhanced */}
           <Grid
             size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
             sx={{ textAlign: { xs: 'center', md: 'left' } }}
           >
-            <Typography fontSize="18px" fontWeight="700" mb="20px" color="text.primary">
-              Follow Us
+            <Typography
+              fontSize="18px"
+              fontWeight="700"
+              mb={3}
+              color="text.primary"
+              sx={{
+                position: 'relative',
+                display: 'inline-block',
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  bottom: '-8px',
+                  left: 0,
+                  width: '40px',
+                  height: '3px',
+                  background: 'linear-gradient(90deg, #1a97f5 0%, #26c6da 100%)',
+                  borderRadius: '2px',
+                },
+              }}
+            >
+              Follow Us 💙
             </Typography>
             <Stack direction="row" spacing={2} justifyContent={{ xs: 'center', md: 'flex-start' }}>
               {[
-               /*  { icon: IconFacebook, label: 'Facebook' },
-                { icon: IconTwitter, label: 'Twitter' }, */
-                { icon: IconInstagram, label: 'Instagram' },
+                { icon: IconInstagram, label: 'Instagram', color: '#E4405F' },
               ].map((social, idx) => (
                 <Tooltip title={social.label} key={idx}>
                   <IconButton
                     component={NavLink}
                     to="#"
                     sx={{
-                      width: 42,
-                      height: 42,
+                      width: 48,
+                      height: 48,
                       borderRadius: '50%',
-                      bgcolor: 'background.paper',
-                      boxShadow: 1,
+                      background: 'linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%)',
+                      border: '2px solid',
+                      borderColor: 'grey.200',
+                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                       '&:hover': {
-                        bgcolor: 'primary.main',
-                        '& img': { filter: 'invert(1)' },
+                        background: 'linear-gradient(135deg, #1a97f5 0%, #26c6da 100%)',
+                        borderColor: 'primary.main',
+                        transform: 'translateY(-4px) rotate(5deg)',
+                        boxShadow: '0 8px 20px rgba(26,151,245,0.3)',
+                        '& img': { 
+                          filter: 'brightness(0) invert(1)',
+                          transform: 'scale(1.1)',
+                        },
+                      },
+                      '& img': {
+                        transition: 'all 0.3s ease',
                       },
                     }}
                   >
-                    <img src={social.icon} alt={social.label} width={20} height={20} />
+                    <img src={social.icon} alt={social.label} width={22} height={22} />
                   </IconButton>
                 </Tooltip>
               ))}
             </Stack>
+            
+            {/* Contact Info */}
+          
           </Grid>
         </Grid>
 
-        <Divider sx={{ mb: 4 }} />
+        <Divider
+          sx={{
+            mb: 4,
+            borderColor: 'grey.200',
+            opacity: 0.6,
+          }}
+        />
 
-        {/* Bottom Bar */}
-        {/*   <Box
-          py={2}
-          display="flex"
-          flexDirection={{ xs: 'column', sm: 'row' }}
-          alignItems="center"
-          justifyContent="space-between"
-          gap={2}
-        >
-          <Stack direction="row" gap={1.5} alignItems="center">
-            <img src={LogoIcon} width={24} height={24} alt="logo" />
-            <Typography variant="body2" color="text.secondary">
-              © {new Date().getFullYear()} Fixidi. All rights reserved.
-            </Typography>
-          </Stack>
-          <Typography variant="body2" color="text.secondary">
-            Produced by{' '}
-            <Typography
-              component={Link}
-              to="https://adminmart.com/"
-              sx={{ color: 'primary.main', textDecoration: 'none' }}
-            >
-              AdminMart
-            </Typography>
-            .
-          </Typography>
-        </Box> */}
+        {/* Bottom Bar - Enhanced */}
+       
       </Container>
     </Box>
   );
