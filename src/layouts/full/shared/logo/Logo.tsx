@@ -29,8 +29,8 @@ const Logo: FC = () => {
   }));
 
   const logoStyle = {
-    width: customizer.isCollapse ? '40px' : '180px', // control image size
-    height: '40px', // maintain aspect ratio
+    width: customizer.isCollapse ? '40px' : '120px', // control image size
+    height: '30px', // maintain aspect ratio
   };
 
   if (customizer.activeDir === 'ltr') {
