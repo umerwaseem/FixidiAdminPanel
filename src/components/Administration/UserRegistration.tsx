@@ -15,6 +15,7 @@ import {
   Slider,
   Tooltip,
   Divider,
+  styled,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
@@ -53,6 +54,27 @@ interface FormValues {
   expertiseList: ExpertiseEntry[];
   userType: 'client' | 'professional';
 }
+const StyledButton = styled(Button)(({ theme }) => ({
+  backgroundColor: 'primary.main', // your old blue
+  color: '#fff',
+  borderRadius: '25px',
+  padding: '8px 20px',
+  fontSize: '0.9rem',
+  fontWeight: 600,
+  textTransform: 'none',
+  boxShadow: '0 2px 8px rgba(26, 151, 245, 0.4)',
+  '&:hover': {
+    backgroundColor: '#0d8ce0',
+    boxShadow: '0 3px 10px rgba(26, 151, 245, 0.5)',
+  },
+  // Mobile responsiveness
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '0.75rem',
+    padding: '6px 14px',
+    borderRadius: '20px',
+    marginRight: theme.spacing(1),
+  },
+}));
 
 const UserRegistration = () => {
   const location = useLocation();
@@ -210,8 +232,8 @@ const UserRegistration = () => {
                     phoneNumber: '',
                     city: '',
                     postalCode: '',
-                   
-                    area: [], 
+
+                    area: [],
                     areaLine: '',
                     expertiseList: [
                       {
@@ -232,9 +254,8 @@ const UserRegistration = () => {
                   validateOnMount
                   //  validationContext={{ userType }}
                   onSubmit={async (values) => {
-                    
                     try {
-                          setLoading(true);
+                      setLoading(true);
                       const cleanedPhone = values.phoneNumber.replace(/\s+/g, '');
                       const payload = {
                         ...values,
@@ -243,12 +264,9 @@ const UserRegistration = () => {
                       };
                       console.log('payload ==>', payload);
 
-
- 
                       const result = await apiService.addUser(payload);
                       console.log('API Result ==>', result);
 
-                      
                       // Check for conflict or error in response
                       if (
                         result?.status === 'CONFLICT' ||
@@ -259,18 +277,17 @@ const UserRegistration = () => {
                         return;
                       }
 
-
                       await fetch(
                         'https://script.google.com/macros/s/AKfycbzA1Ej6HTMfnaCVGN-ms1mdWDKi4ePvPN_pntFRqg6WdOtwREtRzL5fX1ZMoZhllb_B/exec',
                         {
                           method: 'POST',
-                         mode: 'no-cors',
+                          mode: 'no-cors',
                           headers: { 'Content-Type': 'application/json' },
                           body: JSON.stringify(payload),
                         },
                       );
-                      setOpenAlert(true)
-                   //   setTimeout(() => navigate('/FixidiLandingPage'), 2000);
+                      setOpenAlert(true);
+                      //   setTimeout(() => navigate('/FixidiLandingPage'), 2000);
                       /*  .then(setTimeout(() => navigate('/FixidiLandingPage'), 2000);)
                         .then((res) => res.json())
                         .then((data) => {
@@ -289,10 +306,9 @@ const UserRegistration = () => {
                       } */
                     } catch (error) {
                       console.error('Error while submitting user:', error);
+                    } finally {
+                      setLoading(false); // hide loader
                     }
-                    finally {
-          setLoading(false); // hide loader
-        }
                   }}
                 >
                   {({
@@ -336,149 +352,21 @@ const UserRegistration = () => {
                     }, [houseServiceId, serviceType, houseServices, setFieldValue]);
                     return (
                       <>
-                      {loading && <Spinner />}
-                      <Form onSubmit={submitForm}>
-                        <Grid container spacing={2}>
-                          <Grid
-                            size={{
-                              xs: 12,
-                              sm: 12,
-                              lg: 12,
-                              xl: 12,
-                            }}
-                          >
-
-                          <Divider  textAlign="left"><b>
-                          Contact Information
-                          </b>
-                          </Divider>
-                          </Grid>
-                          <Grid
-                            size={{
-                              xs: 12,
-                              sm: 12,
-                              lg: 6,
-                              xl: 6,
-                            }}
-                          >
-                            <TextField
-                              name="firstName"
-                              label="First Name *"
-                              fullWidth
-                              size="small"
-                              value={values.firstName}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              error={touched.firstName && Boolean(errors.firstName)}
-                              helperText={touched.firstName && errors.firstName}
-                            />
-                          </Grid>
-                          <Grid
-                            size={{
-                              xs: 12,
-                              sm: 12,
-                              lg: 6,
-                              xl: 6,
-                            }}
-                          >
-                            <TextField
-                              name="lastName"
-                              label="Last Name *"
-                              fullWidth
-                              size="small"
-                              value={values.lastName}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              error={touched.lastName && Boolean(errors.lastName)}
-                              helperText={touched.lastName && errors.lastName}
-                            />
-                          </Grid>
-                          <Grid
-                            size={{
-                              xs: 12,
-                              sm: 12,
-                              lg: 6,
-                              xl: 6,
-                            }}
-                          >
-                            <TextField
-                              name="email"
-                              label="Email *"
-                              fullWidth
-                              size="small"
-                              value={values.email}
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              error={touched.email && Boolean(errors.email)}
-                              helperText={touched.email && errors.email}
-                            />
-                          </Grid>
-                          <Grid
-                            size={{
-                              xs: 12,
-                              sm: 12,
-                              lg: 6,
-                              xl: 6,
-                            }}
-                          >
-                            <MuiTelInput
-                              name="phoneNumber *"
-                              label="Phone Number *"
-                              defaultCountry="CA"
-                              value={values.phoneNumber}
-                              onChange={(value) => setFieldValue('phoneNumber', value)}
-                              onBlur={handleBlur}
-                              size="small"
-                              fullWidth
-                              error={touched.phoneNumber && Boolean(errors.phoneNumber)}
-                              helperText={touched.phoneNumber && errors.phoneNumber}
-                            />
-                          </Grid>
-
-                           <Grid
-                            size={{
-                              xs: 12,
-                              sm: 12,
-                              lg: 12,
-                              xl: 12,
-                            }}
-                          >
-
-                          <Divider  textAlign="left"><b>
-                          Address Details
-                          </b>
-                          </Divider>
-                          </Grid>
-                          <Grid
-                            size={{
-                              xs: 12,
-                              sm: 12,
-                              lg: 6,
-                              xl: 6,
-                            }}
-                          >
-                            <Autocomplete
-                              size="small"
-                              options={canadaAreas.map((option) => option.title)}
-                              value={values.city}
-                              onChange={(_, newValue) => setFieldValue('city', newValue || '')}
-                              getOptionLabel={(option) => option}
-                              renderInput={(params) => (
-                                <TextField
-                                  {...params}
-                                  label="City *"
-                                  name="city"
-                                  value={values.city}
-                                  onChange={(e) => setFieldValue('city', e.target.value)}
-                                  onBlur={handleBlur}
-                                  error={touched.city && Boolean(errors.city)}
-                                  helperText={touched.city && errors.city}
-                                />
-                              )}
-                            />
-                          </Grid>
-
-                          {userType === 'client' && (
+                        {loading && <Spinner />}
+                        <Form onSubmit={submitForm}>
+                          <Grid container spacing={2}>
+                            <Grid
+                              size={{
+                                xs: 12,
+                                sm: 12,
+                                lg: 12,
+                                xl: 12,
+                              }}
+                            >
+                              <Divider textAlign="left">
+                                <b>Contact Information</b>
+                              </Divider>
+                            </Grid>
                             <Grid
                               size={{
                                 xs: 12,
@@ -488,43 +376,79 @@ const UserRegistration = () => {
                               }}
                             >
                               <TextField
-                                name="postalCode"
-                                label="Postal Code *"
+                                name="firstName"
+                                label="First Name *"
                                 fullWidth
                                 size="small"
-                                value={values.postalCode}
+                                value={values.firstName}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                error={touched.postalCode && Boolean(errors.postalCode)}
-                                helperText={touched.postalCode && errors.postalCode}
+                                error={touched.firstName && Boolean(errors.firstName)}
+                                helperText={touched.firstName && errors.firstName}
                               />
                             </Grid>
-                          )}
-
-                          {userType === 'client' && (
                             <Grid
                               size={{
                                 xs: 12,
                                 sm: 12,
-                                lg: 12,
-                                xl: 12,
+                                lg: 6,
+                                xl: 6,
                               }}
                             >
                               <TextField
-                                name="areaLine"
-                                label="Address Line *"
+                                name="lastName"
+                                label="Last Name *"
                                 fullWidth
                                 size="small"
-                                value={values.areaLine}
+                                value={values.lastName}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                error={touched.areaLine && Boolean(errors.areaLine)}
-                                helperText={touched.areaLine && errors.areaLine}
+                                error={touched.lastName && Boolean(errors.lastName)}
+                                helperText={touched.lastName && errors.lastName}
                               />
                             </Grid>
-                          )}
+                            <Grid
+                              size={{
+                                xs: 12,
+                                sm: 12,
+                                lg: 6,
+                                xl: 6,
+                              }}
+                            >
+                              <TextField
+                                name="email"
+                                label="Email *"
+                                fullWidth
+                                size="small"
+                                value={values.email}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                error={touched.email && Boolean(errors.email)}
+                                helperText={touched.email && errors.email}
+                              />
+                            </Grid>
+                            <Grid
+                              size={{
+                                xs: 12,
+                                sm: 12,
+                                lg: 6,
+                                xl: 6,
+                              }}
+                            >
+                              <MuiTelInput
+                                name="phoneNumber *"
+                                label="Phone Number *"
+                                defaultCountry="CA"
+                                value={values.phoneNumber}
+                                onChange={(value) => setFieldValue('phoneNumber', value)}
+                                onBlur={handleBlur}
+                                size="small"
+                                fullWidth
+                                error={touched.phoneNumber && Boolean(errors.phoneNumber)}
+                                helperText={touched.phoneNumber && errors.phoneNumber}
+                              />
+                            </Grid>
 
-                          {userType === 'professional' && (
                             <Grid
                               size={{
                                 xs: 12,
@@ -533,129 +457,266 @@ const UserRegistration = () => {
                                 xl: 12,
                               }}
                             >
+                              <Divider textAlign="left">
+                                <b>Address Details</b>
+                              </Divider>
+                            </Grid>
+                            <Grid
+                              size={{
+                                xs: 12,
+                                sm: 12,
+                                lg: 6,
+                                xl: 6,
+                              }}
+                            >
                               <Autocomplete
-                                multiple
-                                fullWidth
                                 size="small"
-                                id="checkboxes-tags-demo"
-                                options={canadaAreas}
-                                disableCloseOnSelect
-                                getOptionLabel={(option) => option.title}
-                                value={values.area || []}
-                                onChange={(_, newValue) => {
-                                  setFieldValue('area', newValue);
-                                }}
-                                renderOption={(props, option, { selected }) => {
-                                  const { key, ...optionProps } = props;
-                                  return (
-                                    <li key={key} {...optionProps}>
-                                      <Checkbox
-                                        icon={icon}
-                                        checkedIcon={checkedIcon}
-                                        style={{ marginRight: 8 }}
-                                        checked={selected}
-                                      />
-                                      {option.title}
-                                    </li>
-                                  );
-                                }}
+                                options={canadaAreas.map((option) => option.title)}
+                                value={values.city}
+                                onChange={(_, newValue) => setFieldValue('city', newValue || '')}
+                                getOptionLabel={(option) => option}
                                 renderInput={(params) => (
                                   <TextField
                                     {...params}
-                                    name="area"
-                                    label="Coverage Area *"
-                                    placeholder="Select Areas You Serve"
-                                    error={touched.area && Boolean(errors.area)}
-                                    helperText={
-                                      touched.area &&
-                                      (typeof errors.area === 'string'
-                                        ? errors.area
-                                        : Array.isArray(errors.area)
-                                        ? 'Coverage area is required'
-                                        : '')
-                                    }
+                                    label="City *"
+                                    name="city"
+                                    value={values.city}
+                                    onChange={(e) => setFieldValue('city', e.target.value)}
+                                    onBlur={handleBlur}
+                                    error={touched.city && Boolean(errors.city)}
+                                    helperText={touched.city && errors.city}
                                   />
                                 )}
                               />
                             </Grid>
-                          )}
-                       <Grid
-                            size={{
-                              xs: 12,
-                              sm: 12,
-                              lg: 12,
-                              xl: 12,
-                            }}
-                          >
 
-                          <Divider  textAlign="left"><b>
-                          Service Details
-                          </b>
-                          </Divider>
-                          </Grid>
-                          <FieldArray name="expertiseList">
-                            {({ push, remove }) => (
-                              <>
-                                {values.expertiseList.map((item, index) => (
-                                  <Grid
-                                    size={{
-                                      xs: 12,
-                                      sm: 12,
-                                      lg: 12,
-                                      xl: 12,
-                                    }}
-                                    key={index}
-                                  >
-                                    <Grid container spacing={2} alignItems="center">
-                                      <Grid
-                                        size={{
-                                          xs: 12,
-                                          sm: 12,
-                                          lg: 6,
-                                          xl: 6,
-                                        }}
-                                      >
-                                        <Autocomplete
-                                          size="small"
-                                          options={houseServices}
-                                          getOptionLabel={(option) => option.title}
-                                          value={
-                                            houseServices.find((h) => h.id === item.serviceId) ||
-                                            null
-                                          }
-                                          onChange={(_, newVal) => {
-                                            if (newVal) {
-                                              setFieldValue(
-                                                `expertiseList[${index}].expertise`,
-                                                newVal.title,
-                                              );
-                                              setFieldValue(
-                                                `expertiseList[${index}].serviceId`,
-                                                newVal.id,
-                                              );
-                                            } else {
-                                              setFieldValue(
-                                                `expertiseList[${index}].expertise`,
-                                                '',
-                                              );
-                                              setFieldValue(
-                                                `expertiseList[${index}].serviceId`,
-                                                '',
-                                              );
-                                            }
+                            {userType === 'client' && (
+                              <Grid
+                                size={{
+                                  xs: 12,
+                                  sm: 12,
+                                  lg: 6,
+                                  xl: 6,
+                                }}
+                              >
+                                <TextField
+                                  name="postalCode"
+                                  label="Postal Code *"
+                                  fullWidth
+                                  size="small"
+                                  value={values.postalCode}
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  error={touched.postalCode && Boolean(errors.postalCode)}
+                                  helperText={touched.postalCode && errors.postalCode}
+                                />
+                              </Grid>
+                            )}
+
+                            {userType === 'client' && (
+                              <Grid
+                                size={{
+                                  xs: 12,
+                                  sm: 12,
+                                  lg: 12,
+                                  xl: 12,
+                                }}
+                              >
+                                <TextField
+                                  name="areaLine"
+                                  label="Address Line *"
+                                  fullWidth
+                                  size="small"
+                                  value={values.areaLine}
+                                  onChange={handleChange}
+                                  onBlur={handleBlur}
+                                  error={touched.areaLine && Boolean(errors.areaLine)}
+                                  helperText={touched.areaLine && errors.areaLine}
+                                />
+                              </Grid>
+                            )}
+
+                            {userType === 'professional' && (
+                              <Grid
+                                size={{
+                                  xs: 12,
+                                  sm: 12,
+                                  lg: 12,
+                                  xl: 12,
+                                }}
+                              >
+                                <Autocomplete
+                                  multiple
+                                  fullWidth
+                                  size="small"
+                                  id="checkboxes-tags-demo"
+                                  options={canadaAreas}
+                                  disableCloseOnSelect
+                                  getOptionLabel={(option) => option.title}
+                                  value={values.area || []}
+                                  onChange={(_, newValue) => {
+                                    setFieldValue('area', newValue);
+                                  }}
+                                  renderOption={(props, option, { selected }) => {
+                                    const { key, ...optionProps } = props;
+                                    return (
+                                      <li key={key} {...optionProps}>
+                                        <Checkbox
+                                          icon={icon}
+                                          checkedIcon={checkedIcon}
+                                          style={{ marginRight: 8 }}
+                                          checked={selected}
+                                        />
+                                        {option.title}
+                                      </li>
+                                    );
+                                  }}
+                                  renderInput={(params) => (
+                                    <TextField
+                                      {...params}
+                                      name="area"
+                                      label="Coverage Area *"
+                                      placeholder="Select Areas You Serve"
+                                      error={touched.area && Boolean(errors.area)}
+                                      helperText={
+                                        touched.area &&
+                                        (typeof errors.area === 'string'
+                                          ? errors.area
+                                          : Array.isArray(errors.area)
+                                          ? 'Coverage area is required'
+                                          : '')
+                                      }
+                                    />
+                                  )}
+                                />
+                              </Grid>
+                            )}
+                            <Grid
+                              size={{
+                                xs: 12,
+                                sm: 12,
+                                lg: 12,
+                                xl: 12,
+                              }}
+                            >
+                              <Divider textAlign="left">
+                                <b>Service Details</b>
+                              </Divider>
+                            </Grid>
+                            <FieldArray name="expertiseList">
+                              {({ push, remove }) => (
+                                <>
+                                  {values.expertiseList.map((item, index) => (
+                                    <Grid
+                                      size={{
+                                        xs: 12,
+                                        sm: 12,
+                                        lg: 12,
+                                        xl: 12,
+                                      }}
+                                      key={index}
+                                    >
+                                      <Grid container spacing={2} alignItems="center">
+                                        <Grid
+                                          size={{
+                                            xs: 12,
+                                            sm: 12,
+                                            lg: 6,
+                                            xl: 6,
                                           }}
-                                          renderInput={(params) => (
+                                        >
+                                          <Autocomplete
+                                            size="small"
+                                            options={houseServices}
+                                            getOptionLabel={(option) => option.title}
+                                            value={
+                                              houseServices.find((h) => h.id === item.serviceId) ||
+                                              null
+                                            }
+                                            onChange={(_, newVal) => {
+                                              if (newVal) {
+                                                setFieldValue(
+                                                  `expertiseList[${index}].expertise`,
+                                                  newVal.title,
+                                                );
+                                                setFieldValue(
+                                                  `expertiseList[${index}].serviceId`,
+                                                  newVal.id,
+                                                );
+                                              } else {
+                                                setFieldValue(
+                                                  `expertiseList[${index}].expertise`,
+                                                  '',
+                                                );
+                                                setFieldValue(
+                                                  `expertiseList[${index}].serviceId`,
+                                                  '',
+                                                );
+                                              }
+                                            }}
+                                            renderInput={(params) => (
+                                              <TextField
+                                                {...params}
+                                                name={`expertiseList[${index}].expertise`}
+                                                label={
+                                                  userType === 'client'
+                                                    ? 'Service *'
+                                                    : 'Expertise *'
+                                                }
+                                                placeholder={
+                                                  userType === 'client'
+                                                    ? 'Select Service Name'
+                                                    : 'Select Expertise Expertise'
+                                                }
+                                                error={
+                                                  getIn(
+                                                    touched,
+                                                    `expertiseList[${index}].expertise`,
+                                                  ) &&
+                                                  Boolean(
+                                                    getIn(
+                                                      errors,
+                                                      `expertiseList[${index}].expertise`,
+                                                    ),
+                                                  )
+                                                }
+                                                helperText={
+                                                  getIn(
+                                                    touched,
+                                                    `expertiseList[${index}].expertise`,
+                                                  ) &&
+                                                  getIn(errors, `expertiseList[${index}].expertise`)
+                                                }
+                                              />
+                                            )}
+                                          />
+                                        </Grid>
+                                        {userType === 'professional' && (
+                                          <Grid
+                                            size={{
+                                              xs: 12,
+                                              sm: 12,
+                                              lg: 3,
+                                              xl: 3,
+                                            }}
+                                          >
                                             <TextField
-                                              {...params}
-                                              name={`expertiseList[${index}].expertise`}
-                                              label={
-                                                userType === 'client' ? 'Service *' : 'Expertise *'
-                                              }
-                                              placeholder={
-                                                userType === 'client'
-                                                  ? 'Select Service Name'
-                                                  : 'Select Expertise Expertise'
-                                              }
+                                              name={`expertiseList[${index}].rate`}
+                                              label="Rates *"
+                                              slotProps={{
+                                                input: {
+                                                  startAdornment: (
+                                                    <InputAdornment position="start">
+                                                      $
+                                                    </InputAdornment>
+                                                  ),
+                                                },
+                                              }}
+                                              fullWidth
+                                              size="small"
+                                              value={values.expertiseList[index].rate}
+                                              onChange={handleChange}
+                                              onBlur={handleBlur}
                                               error={
                                                 getIn(
                                                   touched,
@@ -676,69 +737,29 @@ const UserRegistration = () => {
                                                 getIn(errors, `expertiseList[${index}].expertise`)
                                               }
                                             />
-                                          )}
-                                        />
-                                      </Grid>
-                                      {userType === 'professional' && (
-                                        <Grid
-                                          size={{
-                                            xs: 12,
-                                            sm: 12,
-                                            lg: 3,
-                                            xl: 3,
-                                          }}
-                                        >
-                                          <TextField
-                                            name={`expertiseList[${index}].rate`}
-                                            label="Rates *"
-                                            slotProps={{
-                                              input: {
-                                                startAdornment: (
-                                                  <InputAdornment position="start">
-                                                    $
-                                                  </InputAdornment>
-                                                ),
-                                              },
-                                            }}
-                                            fullWidth
-                                            size="small"
-                                            value={values.expertiseList[index].rate}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            error={
-                                              getIn(touched, `expertiseList[${index}].expertise`) &&
-                                              Boolean(
-                                                getIn(errors, `expertiseList[${index}].expertise`),
-                                              )
-                                            }
-                                            helperText={
-                                              getIn(touched, `expertiseList[${index}].expertise`) &&
-                                              getIn(errors, `expertiseList[${index}].expertise`)
-                                            }
-                                          />
-                                        </Grid>
-                                      )}
+                                          </Grid>
+                                        )}
 
-                                      {userType === 'client' && (
-                                        <Grid
-                                          size={{
-                                            xs: 12,
-                                            sm: 12,
-                                            lg: 6,
-                                            xl: 6,
-                                          }}
-                                        >
-                                          <Box display="flex" alignItems="center" gap={2}>
-                                            <Typography>Min</Typography>{' '}
-                                            {/* This acts like a start adornment */}
-                                            <Slider
-                                              name={`expertiseList[${index}].arrHourlyRates`}
-                                              getAriaLabel={() => 'Minimum distance'}
-                                              value={[
-                                                values.expertiseList[index].minimumHourlyRate,
-                                                values.expertiseList[index].maximumHourlyRate,
-                                              ]}
-                                              /* value={
+                                        {userType === 'client' && (
+                                          <Grid
+                                            size={{
+                                              xs: 12,
+                                              sm: 12,
+                                              lg: 6,
+                                              xl: 6,
+                                            }}
+                                          >
+                                            <Box display="flex" alignItems="center" gap={2}>
+                                              <Typography>Min</Typography>{' '}
+                                              {/* This acts like a start adornment */}
+                                              <Slider
+                                                name={`expertiseList[${index}].arrHourlyRates`}
+                                                getAriaLabel={() => 'Minimum distance'}
+                                                value={[
+                                                  values.expertiseList[index].minimumHourlyRate,
+                                                  values.expertiseList[index].maximumHourlyRate,
+                                                ]}
+                                                /* value={
                                                 values.expertiseList[index].minimumHourlyRate
                                                   ? values.expertiseList[index].minimumHourlyRate
                                                   : [
@@ -746,182 +767,189 @@ const UserRegistration = () => {
                                                       values.expertiseList[index].maximumHourlyRate,
                                                     ]
                                               } */
-                                              onChange={(_, newValue) => {
-                                                let  [minRate, maxRate] = newValue as number[];
-if (maxRate - minRate < 25) {
-      if (minRate !== values.expertiseList[index].minimumHourlyRate) {
-        minRate = maxRate - 25;
-      } else {
-        maxRate = minRate + 25;
-      }
-    }
-                                                // Update all related fields
-                                                setFieldValue(
-                                                  `expertiseList[${index}].minimumHourlyRate`,
-                                                  minRate,
-                                                );
-                                                setFieldValue(
-                                                  `expertiseList[${index}].maximumHourlyRate`,
-                                                  maxRate,
-                                                );
-                                                setFieldValue(
-                                                  `expertiseList[${index}].arrHourlyRates`,
-                                                  [minRate, maxRate],
-                                                );
-                                              }}
-                                              valueLabelDisplay="on" // 👈 shows label above thumbs
-                                              getAriaValueText={(value) => `$${value}`} // 👈 screen readers
-                                              valueLabelFormat={(value) => `$${value}`}
-                                              disableSwap
-                                              min={0}
-                                              max={100}
-                                              step={25}
-                                              sx={{
-    '& .MuiSlider-valueLabel': {
-      backgroundColor: '#5D87FF',
-      color: '#fff',
-      fontWeight: 'bold',
-      fontSize: '0.85rem',
-      borderRadius: '6px',
-      padding: '4px 8px',
-    },
-    '& .MuiSlider-thumb': {
-      border: '2px solid #5D87FF',
-    },
-    '& .MuiSlider-track': {
-      backgroundColor: '#5D87FF',
-    },
-  }}
-                                            />
-                                            <Typography>Max </Typography>
-                                          </Box>
-                                        </Grid>
-                                      )}
-                                      {userType === 'professional' && (
-                                        <Grid
-                                          size={{
-                                            xs: 12,
-                                            sm: 12,
-                                            lg: 2,
-                                            xl: 2,
-                                          }}
-                                        >
-                                          <FormControlLabel
-                                            label=""
-                                            style={{ marginLeft: '0' }}
-                                            control={
-                                              <Box display="flex" alignItems="center" gap={1}>
-                                                <Tooltip title="Enable if you charge by the hour">
-                                                  <Typography variant="body2">
-                                                    {values.expertiseList[index]
-                                                      .isHourlyRateApplicable
-                                                      ? 'Hourly'
-                                                      : 'Fixed'}
-                                                  </Typography>
-                                                </Tooltip>
-                                                <Switch
-                                                  name={`expertiseList[${index}].isHourlyRateApplicable`}
-                                                  checked={
-                                                    values.expertiseList[index]
-                                                      .isHourlyRateApplicable
+                                                onChange={(_, newValue) => {
+                                                  let [minRate, maxRate] = newValue as number[];
+                                                  if (maxRate - minRate < 25) {
+                                                    if (
+                                                      minRate !==
+                                                      values.expertiseList[index].minimumHourlyRate
+                                                    ) {
+                                                      minRate = maxRate - 25;
+                                                    } else {
+                                                      maxRate = minRate + 25;
+                                                    }
                                                   }
-                                                  onChange={handleChange}
-                                                />
-                                              </Box>
-                                            }
-                                          />
-                                        </Grid>
-                                      )}
-                                      {userType === 'client' && (
+                                                  // Update all related fields
+                                                  setFieldValue(
+                                                    `expertiseList[${index}].minimumHourlyRate`,
+                                                    minRate,
+                                                  );
+                                                  setFieldValue(
+                                                    `expertiseList[${index}].maximumHourlyRate`,
+                                                    maxRate,
+                                                  );
+                                                  setFieldValue(
+                                                    `expertiseList[${index}].arrHourlyRates`,
+                                                    [minRate, maxRate],
+                                                  );
+                                                }}
+                                                valueLabelDisplay="on" // 👈 shows label above thumbs
+                                                getAriaValueText={(value) => `$${value}`} // 👈 screen readers
+                                                valueLabelFormat={(value) => `$${value}`}
+                                                disableSwap
+                                                min={0}
+                                                max={100}
+                                                step={25}
+                                                sx={{
+                                                  '& .MuiSlider-valueLabel': {
+                                                    backgroundColor: '#5D87FF',
+                                                    color: '#fff',
+                                                    fontWeight: 'bold',
+                                                    fontSize: '0.85rem',
+                                                    borderRadius: '6px',
+                                                    padding: '4px 8px',
+                                                  },
+                                                  '& .MuiSlider-thumb': {
+                                                    border: '2px solid #5D87FF',
+                                                  },
+                                                  '& .MuiSlider-track': {
+                                                    backgroundColor: '#5D87FF',
+                                                  },
+                                                }}
+                                              />
+                                              <Typography>Max </Typography>
+                                            </Box>
+                                          </Grid>
+                                        )}
+                                        {userType === 'professional' && (
+                                          <Grid
+                                            size={{
+                                              xs: 12,
+                                              sm: 12,
+                                              lg: 2,
+                                              xl: 2,
+                                            }}
+                                          >
+                                            <FormControlLabel
+                                              label=""
+                                              style={{ marginLeft: '0' }}
+                                              control={
+                                                <Box display="flex" alignItems="center" gap={1}>
+                                                  <Tooltip title="Enable if you charge by the hour">
+                                                    <Typography variant="body2">
+                                                      {values.expertiseList[index]
+                                                        .isHourlyRateApplicable
+                                                        ? 'Hourly'
+                                                        : 'Fixed'}
+                                                    </Typography>
+                                                  </Tooltip>
+                                                  <Switch
+                                                    name={`expertiseList[${index}].isHourlyRateApplicable`}
+                                                    checked={
+                                                      values.expertiseList[index]
+                                                        .isHourlyRateApplicable
+                                                    }
+                                                    onChange={handleChange}
+                                                  />
+                                                </Box>
+                                              }
+                                            />
+                                          </Grid>
+                                        )}
+                                        {userType === 'client' && (
+                                          <Grid
+                                            size={{
+                                              xs: 12,
+                                              sm: 12,
+                                              lg: 9,
+                                              xl: 9,
+                                            }}
+                                          >
+                                            <TextField
+                                              name={`expertiseList[${index}].comments`}
+                                              label="Comments"
+                                              placeholder="Enter any notes or preferences..."
+                                              fullWidth
+                                              size="small"
+                                              value={item.comments}
+                                              onChange={handleChange}
+                                              onBlur={handleBlur}
+                                            />
+                                          </Grid>
+                                        )}
                                         <Grid
                                           size={{
-                                            xs: 12,
+                                            xs: 2,
                                             sm: 12,
-                                            lg: 9,
-                                            xl: 9,
+                                            lg: 1,
+                                            xl: 1,
                                           }}
+                                          sx={{ px: 1 }}
                                         >
-                                          <TextField
-                                            name={`expertiseList[${index}].comments`}
-                                            label="Comments"
-                                            placeholder="Enter any notes or preferences..."
-                                            fullWidth
-                                            size="small"
-                                            value={item.comments}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                          />
+                                          {index > 0 && (
+                                            <Tooltip title="Remove">
+                                              <DeleteIcon
+                                                color="error"
+                                                onClick={() => remove(index)}
+                                              />
+                                            </Tooltip>
+                                          )}
                                         </Grid>
-                                      )}
-                                      <Grid
-                                        size={{
-                                          xs: 2,
-                                          sm: 12,
-                                          lg: 1,
-                                          xl: 1,
-                                          
-                                        }}
-                                        sx={{ px: 1 }}
-                                      >
-                                        {index > 0 && (
-                                        <Tooltip title="Remove">
-                                          <DeleteIcon color="error" onClick={() => remove(index)} />
-                                        </Tooltip>
-                                        )}
                                       </Grid>
                                     </Grid>
-                                  </Grid>
-                                ))}
-                                <Grid
-                                  size={{
-                                    xs: 12,
-                                    sm: 12,
-                                    lg: 12,
-                                    xl: 12,
-                                  }}
-                                >
-                                  <Button
-                                    size="small"
-                                    variant="outlined"
-                                    onClick={() =>
-                                      push({
-                                        expertise: '',
-                                        serviceId: '',
-                                        minimumHourlyRate: userType === 'professional' ? 0 : 25,
-                                        maximumHourlyRate: userType === 'professional' ? 0 : 50,
-                                        rate: userType === 'client' ? 0 : 20,
-                                        comments: '',
-                                        isHourlyRateApplicable: false,
-                                      })
-                                    }
+                                  ))}
+                                  <Grid
+                                    size={{
+                                      xs: 12,
+                                      sm: 12,
+                                      lg: 12,
+                                      xl: 12,
+                                    }}
                                   >
-                                    {userType === 'client'
-                                      ? 'Add Another Service'
-                                      : 'Add Another Expertise'}
-                                  </Button>
-                                </Grid>
-                              </>
-                            )}
-                          </FieldArray>
-                        </Grid>
+                                    <Button
+                                      size="small"
+                                      variant="outlined"
+                                      onClick={() =>
+                                        push({
+                                          expertise: '',
+                                          serviceId: '',
+                                          minimumHourlyRate: userType === 'professional' ? 0 : 25,
+                                          maximumHourlyRate: userType === 'professional' ? 0 : 50,
+                                          rate: userType === 'client' ? 0 : 20,
+                                          comments: '',
+                                          isHourlyRateApplicable: false,
+                                        })
+                                      }
+                                    >
+                                      {userType === 'client'
+                                        ? 'Add Another Service'
+                                        : 'Add Another Expertise'}
+                                    </Button>
+                                  </Grid>
+                                </>
+                              )}
+                            </FieldArray>
+                          </Grid>
 
-                        <Snackbar
-                          open={openAlert}
-                          autoHideDuration={5000}
-                          onClose={() => {
-                            setOpenAlert(false);
+                          <Snackbar
+                            open={openAlert}
+                            autoHideDuration={5000}
+                            onClose={() => {
+                              setOpenAlert(false);
                               navigate('/');
-                          }}
-                    
-                        >
-                          <Alert severity="success" sx={{ width: '100%',background:"#5D87FF", color:"white" }}>
-                            Submitted Successfully!
-                          </Alert>
-                        </Snackbar>
-                        {/*  <Button variant="contained" type="submit">
+                            }}
+                          >
+                            <Alert
+                              severity="success"
+                              sx={{ width: '100%', background: '#5D87FF', color: 'white' }}
+                            >
+                              Submitted Successfully!
+                            </Alert>
+                          </Snackbar>
+                          {/*  <Button variant="contained" type="submit">
                           {userType === 'client' ? 'Hire a Professional' : 'Become a Professional'}
                         </Button> */}
-                      </Form>
+                        </Form>
                       </>
                     );
                   }}
@@ -935,9 +963,13 @@ if (maxRate - minRate < 25) {
                   textAlign: 'center',
                 }}
               >
-                <Button variant="contained" onClick={() => formikRef.current?.submitForm()}>
+                {' '}
+                <StyledButton variant="contained" onClick={() => formikRef.current?.submitForm()}>
                   {userType === 'client' ? 'Hire a Professional' : 'Become a Professional'}
-                </Button>
+                </StyledButton>
+                {/*   <Button variant="contained" onClick={() => formikRef.current?.submitForm()}>
+                  {userType === 'client' ? 'Hire a Professional' : 'Become a Professional'}
+                </Button> */}
               </Box>
             </Box>
           </Grid>
