@@ -81,6 +81,11 @@ function HowItWorks() {
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
+               transition: 'transform 0.4s ease, filter 0.4s ease',
+  '&:hover': {
+    transform: { md: 'scale(1.03)' },
+    filter: { md: 'brightness(1.1)' },
+  },
             }}
           />
 
@@ -96,6 +101,9 @@ function HowItWorks() {
               mx: { xs: 'auto', md: 0 },
               mt: { xs: -6, md: 0 },
               zIndex: 2,
+               '&:hover': {
+      opacity: { md: 1 }, // 👈 hover only affects desktop
+    },
             }}
           >
             <BlankCard
@@ -174,6 +182,11 @@ function HowItWorks() {
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               boxShadow: '0 8px 24px rgba(0,0,0,0.2)',
+               transition: 'transform 0.4s ease, filter 0.4s ease',
+  '&:hover': {
+    transform: { md: 'scale(1.03)' },
+    filter: { md: 'brightness(1.1)' },
+  },
             }}
           />
 
@@ -189,6 +202,9 @@ function HowItWorks() {
               mx: { xs: 'auto', md: 0 },
               mt: { xs: -6, md: 0 },
               zIndex: 2,
+               '&:hover': {
+      opacity: { md: 1 }, // 👈 hover only affects desktop
+    },
             }}
           >
             <BlankCard

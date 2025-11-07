@@ -5,7 +5,7 @@ import {
   Container,
   Grid2 as Grid,
   Autocomplete,
-  Chip,
+
   useMediaQuery,
   useTheme,
 } from '@mui/material';
@@ -133,6 +133,7 @@ const Frameworks = [
 ];
 
 const FixidiLandingPage = () => {
+  const isTouchDevice = typeof window !== 'undefined' && 'ontouchstart' in window;
    const navigate = useNavigate();
   const theme = useTheme();
 const isSmallScreen = useMediaQuery(theme.breakpoints.down('md')); // true for mobile/tablet
@@ -161,7 +162,7 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('md')); // true for m
   return (
     <>
       <HpHeader
-        showProfessionalButton={true}
+       /* // showProfessionalButton={true}
         onProfessionalClick={() =>
           navigate('/user-registration', {
             state: {
@@ -170,7 +171,7 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('md')); // true for m
               serviceType: '',
             },
           })
-        }
+        } */
       />
       <Box py={{ xs: 6, md: 10 }}>
         <Container maxWidth="lg">
@@ -235,27 +236,28 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('md')); // true for m
             <Grid container spacing={4} justifyContent="center">
               {Frameworks.slice(
                 0,
-                isSmallScreen ? (showMore ? Frameworks.length : 6) : Frameworks.length,
+                isSmallScreen ? (showMore ? Frameworks.length : 3) : Frameworks.length,
               ).map((fw, index) => (
                 <Grid
                   key={index}
                    size={{
-                    xs: 6, // ✅ 2 per row on mobile
+                    xs: 12, // ✅ 2 per row on mobile
                     sm: 4, // ✅ 3 per row on tablet
                     md: 3, // ✅ 4 per row on laptop/desktop
                   }}
                 >
                   <Box
-                    onClick={() => handleButtonClick(fw.name, 'client')}
-                    onMouseEnter={() => setHoveredCard(index)}
-                    onMouseLeave={() => setHoveredCard(null)}
+                onClick={() => handleButtonClick(fw.name, 'client')}
+  onMouseEnter={() => !isTouchDevice && setHoveredCard(index)}
+  onMouseLeave={() => !isTouchDevice && setHoveredCard(null)}
                     display="flex"
                     flexDirection="column"
                     alignItems="center"
-                    justifyContent="flex-start"
+                    justifyContent="space-between"
                     textAlign="center"
                     height="100%"
                     p={3.5}
+                    
                     borderRadius="24px"
                     position="relative"
                     sx={{
@@ -264,12 +266,12 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('md')); // true for m
                       border: '2px solid',
                       borderColor: hoveredCard === index ? 'primary.main' : 'grey.200',
                       background: hoveredCard === index 
-                        ? 'linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%)'
-                        : '#ffffff',
+                        ? 'linear-gradient(135deg, #ffffff 0%, #95c0f2ff 100%)'
+                        :  'linear-gradient(135deg, #ffffff 0%, #ddedffff 100%)',
                       boxShadow: hoveredCard === index 
                         ? '0 12px 40px rgba(26,151,245,0.2)'
                         : '0 2px 8px rgba(0,0,0,0.05)',
-                      transform: hoveredCard === index ? 'translateY(-8px)' : 'translateY(0)',
+                      transform: 'translateY(0)',
                       '&::before': {
                         content: '""',
                         position: 'absolute',
@@ -290,15 +292,15 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('md')); // true for m
                     <Box
                       sx={{
                         mb: 2,
-                        transform: hoveredCard === index ? 'scale(1.15) translateY(-4px)' : 'scale(1)',
-                        transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                        transform: 'scale(1.15) translateY(1)',
+                 /*        transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)', */
                       }}
                     >
                       <img
                         src={fw.icon}
                         alt={fw.name}
-                        width={65}
-                        height={75}
+                        width={55}
+                        height={65}
                       />
                     </Box>
 
@@ -307,7 +309,7 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('md')); // true for m
                       variant="h6"
                       fontWeight={700}
                       sx={{
-                        color: hoveredCard === index ? 'primary.main' : 'text.primary',
+                        color: 'primary.main',
                         transition: 'color 0.3s ease',
                         letterSpacing: 0.3,
                       }}
@@ -335,8 +337,8 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('md')); // true for m
                     <Box
                       sx={{
                         mt: 2,
-                        opacity: hoveredCard === index ? 1 : 0,
-                        transform: hoveredCard === index ? 'translateX(0)' : 'translateX(-10px)',
+                        opacity: 1,
+                          
                         transition: 'all 0.3s ease',
                         color: 'primary.main',
                         fontWeight: 600,
@@ -358,63 +360,42 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('md')); // true for m
 {isSmallScreen && !showMore && (
   <Box display="flex" justifyContent="center" mt={5}>
     <Box
-      onClick={() => setShowMore(true)}
+      onClick={() => {
+        setShowMore(true);
+       
+      }}
       sx={{
         cursor: 'pointer',
-        px: 5,
-        py: 2.5,
-        borderRadius: '20px',
-        border: '2px solid transparent',
-        background: 'linear-gradient(135deg, #1a97f5 0%, #26c6da 100%)',
-        position: 'relative',
-        overflow: 'hidden',
-        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        px: 4,
+        py: 2,
+        borderRadius: '16px',
+        border: '2px solid',
+        borderColor: 'grey.300',
+        background: '#ffffff',
+        transition: 'all 0.3s ease',
         display: 'flex',
         alignItems: 'center',
         gap: 1.5,
-        boxShadow: '0 8px 24px rgba(26,151,245,0.3)',
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: '-100%',
-          width: '100%',
-          height: '100%',
-          background:
-            'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
-          transition: 'left 0.6s ease',
-        },
         '&:hover': {
-          transform: 'translateY(-4px) scale(1.02)',
-          boxShadow: '0 12px 32px rgba(26,151,245,0.4)',
-          '&::before': {
-            left: '100%',
-          },
+          borderColor: 'primary.main',
+          background: 'linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%)',
+          transform: 'translateY(-2px)',
+          boxShadow: '0 4px 16px rgba(26,151,245,0.15)',
         },
       }}
     >
-      <Typography
-        variant="h6"
-        fontWeight={700}
-        sx={{
-          color: 'white',
-          letterSpacing: 0.5,
-          textShadow: '0 2px 4px rgba(0,0,0,0.1)',
-        }}
-      >
-        Discover More Services
+      <Typography variant="body1" fontWeight={600} color="text.secondary">
+        Show More
       </Typography>
       <Box
-        className="show-more-icon"
+        className="show-less-icon"
         sx={{
-          fontSize: '1.5rem',
-          color: 'white',
+          fontSize: '1.3rem',
+          color: 'text.secondary',
           transition: 'transform 0.3s ease',
-          display: 'flex',
-          alignItems: 'center',
         }}
       >
-        ✨
+        ↓
       </Box>
     </Box>
   </Box>

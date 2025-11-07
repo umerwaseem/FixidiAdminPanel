@@ -10,8 +10,7 @@ import {
 } from '@mui/material';
 import { NavLink } from 'react-router';
 
-import IconFacebook from 'src/assets/images/frontend-pages/icons/icon-facebook.svg';
-import IconTwitter from 'src/assets/images/frontend-pages/icons/icon-twitter.svg';
+
 import IconInstagram from 'src/assets/images/frontend-pages/icons/icon-instagram.svg';
 
 const footerLinks = [
@@ -36,7 +35,7 @@ const footerLinks = [
       { title: true, titleText: 'Quick Links' },
       { title: false, titleText: 'Home', link: '#' },
       { title: false, titleText: 'Services', link: '#' },
-   //   { title: false, titleText: 'FAQ', link: '#' },
+      { title: false, titleText: 'FAQs', link: '#' },
     ],
   },
   {

@@ -1,0 +1,1 @@
+frontend deployement command = npm run build
