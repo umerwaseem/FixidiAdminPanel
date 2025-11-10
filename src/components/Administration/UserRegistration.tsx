@@ -86,17 +86,16 @@ const UserRegistration = () => {
   const [openAlert, setOpenAlert] = useState(false);
   const { userType, serviceType, houseServiceId } = location.state || {};
   const validationSchema = Yup.object().shape({
-    firstName: Yup.string().required('First name is required'),
-    lastName: Yup.string().required('Last name is required'),
-    email: Yup.string().email('Invalid email').required('Email is required'),
-    phoneNumber: Yup.string().required('Phone number is required'),
-    city: Yup.string().required('City is required'),
-    postalCode:
-      userType === 'client' ? Yup.string().required('Postal code is required') : Yup.string(),
+    firstName: Yup.string().required('Required'),
+    lastName: Yup.string().required('Required'),
+    email: Yup.string().email('Invalid email').required('Required'),
+    phoneNumber: Yup.string().required('Required'),
+    city: Yup.string().required('Required'),
+    postalCode: userType === 'client' ? Yup.string().required('Required') : Yup.string(),
 
     areaLine: Yup.string().when('userType', {
       is: 'client',
-      then: Yup.string().required('Address line is required'),
+      then: Yup.string().required('Required'),
       otherwise: Yup.string().notRequired(),
     }),
     area: Yup.array().when('userType', {
@@ -104,7 +103,7 @@ const UserRegistration = () => {
       then: Yup.array()
         .of(Yup.object().shape({ title: Yup.string().required() }))
         .min(1, 'Select at least one area')
-        .required('Coverage area is required'),
+        .required('Required'),
       otherwise: Yup.array().notRequired(),
     }),
 
@@ -115,7 +114,7 @@ const UserRegistration = () => {
             houseServices.map((s) => s.title),
             'Please select a valid expertise',
           )
-          .required('Expertise is required'),
+          .required('Required'),
         // Conditional hourly rates for professionals
         /*  hourlyRates: Yup.mixed().when('$userType', {
           is: 'client',
@@ -135,7 +134,7 @@ const UserRegistration = () => {
           then: Yup.number()
             .min(0, 'Rate must be at least 0')
             .max(200, 'Rate cannot exceed 200')
-            .required('Rate is required for professionals'),
+            .required('Required'),
           otherwise: Yup.number().notRequired(),
         }),
 
@@ -208,14 +207,22 @@ const UserRegistration = () => {
             }}
           >
             {/*   <Box display="flex" flexDirection="column" height="100vh"> */}
-            <Box display="flex" flexDirection="column" minHeight={{ xs: 'auto', sm: '100vh' }}>
+            <Box
+              display="flex"
+              flexDirection="column"
+              sx={{
+                height: { xs: '100%', sm: '100vh' }, // makes it fill the screen height
+                overflow: 'hidden', // prevent body scroll
+              }}
+            >
               {/* Scrollable form content */}
               <Box
                 p={4}
                 sx={{
                   flex: 1,
                   overflowY: 'auto',
-                  overflowX: 'hidden', // optional padding for scrollbar space
+                  overflowX: 'hidden',
+                  WebkitOverflowScrolling: 'touch', // optional padding for scrollbar space
                 }}
               >
                 <Typography
@@ -602,7 +609,7 @@ const UserRegistration = () => {
                                         (typeof errors.area === 'string'
                                           ? errors.area
                                           : Array.isArray(errors.area)
-                                          ? 'Coverage area is required'
+                                          ? 'Required'
                                           : '')
                                       }
                                       sx={{
@@ -747,23 +754,14 @@ const UserRegistration = () => {
                                               onChange={handleChange}
                                               onBlur={handleBlur}
                                               error={
-                                                getIn(
-                                                  touched,
-                                                  `expertiseList[${index}].expertise`,
-                                                ) &&
+                                                getIn(touched, `expertiseList[${index}].rate`) &&
                                                 Boolean(
-                                                  getIn(
-                                                    errors,
-                                                    `expertiseList[${index}].expertise`,
-                                                  ),
+                                                  getIn(errors, `expertiseList[${index}].rate`),
                                                 )
                                               }
                                               helperText={
-                                                getIn(
-                                                  touched,
-                                                  `expertiseList[${index}].expertise`,
-                                                ) &&
-                                                getIn(errors, `expertiseList[${index}].expertise`)
+                                                getIn(touched, `expertiseList[${index}].rate`) &&
+                                                getIn(errors, `expertiseList[${index}].rate`)
                                               }
                                               sx={{
                                                 '& input': {
@@ -969,7 +967,7 @@ const UserRegistration = () => {
                               )}
                             </FieldArray>
                           </Grid>
-
+                          {/* 
                           <Snackbar
                             open={openAlert}
                             autoHideDuration={5000}
@@ -984,7 +982,7 @@ const UserRegistration = () => {
                             >
                               Submitted Successfully!
                             </Alert>
-                          </Snackbar>
+                          </Snackbar> */}
                           {/*  <Button variant="contained" type="submit">
                           {userType === 'client' ? 'Hire a Professional' : 'Become a Professional'}
                         </Button> */}
@@ -993,6 +991,31 @@ const UserRegistration = () => {
                     );
                   }}
                 </Formik>
+                <Snackbar
+                  open={openAlert}
+                  autoHideDuration={5000}
+                  onClose={() => {
+                    setOpenAlert(false);
+                    navigate('/');
+                  }}
+                  anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                  sx={{ mb: { xs: 8, sm: 0 } }}
+                >
+                  <Alert
+                    severity="success"
+                    sx={{
+                      width: '100%',
+                      background: '#5D87FF',
+                      color: 'white',
+                      fontWeight: 600,
+                      fontSize: '0.95rem',
+                      borderRadius: '10px',
+                      boxShadow: '0px 4px 20px rgba(0,0,0,0.2)',
+                    }}
+                  >
+                    Submitted Successfully!
+                  </Alert>
+                </Snackbar>
               </Box>{' '}
               <Box
                 sx={{
