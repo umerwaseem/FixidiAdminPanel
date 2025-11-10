@@ -33,7 +33,43 @@ export const BuildTheme = (config: any = {}) => {
       direction: config.direction,
     }),
   );
-  theme.components = components(theme);
+  
+theme.components = {
+  ...components(theme),
+  MuiCssBaseline: {
+    styleOverrides: {
+      html: {
+        touchAction: 'manipulation',
+      },
+      body: {
+        WebkitTapHighlightColor: 'transparent',
+        WebkitTextSizeAdjust: '100%',
+        msTextSizeAdjust: '100%',
+        '-webkit-touch-callout': 'none',
+      },
+      '*': {
+        WebkitTapHighlightColor: 'transparent',
+        touchAction: 'manipulation',
+      },
+      input: {
+        fontSize: '16px', // important for iOS zoom fix
+      },
+      select: {
+        fontSize: '16px', // important for iOS zoom fix
+      },
+      textarea: {
+        fontSize: '16px', // important for iOS zoom fix
+      },
+      button: {
+        fontSize: '16px', // optional for consistency
+        touchAction: 'manipulation',
+        WebkitTapHighlightColor: 'transparent',
+      },
+    },
+  },
+};
+
+
 
   return theme;
 };

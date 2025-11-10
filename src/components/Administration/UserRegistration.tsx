@@ -207,7 +207,8 @@ const UserRegistration = () => {
               xl: 4,
             }}
           >
-            <Box display="flex" flexDirection="column" height="100vh">
+            {/*   <Box display="flex" flexDirection="column" height="100vh"> */}
+            <Box display="flex" flexDirection="column" minHeight={{ xs: 'auto', sm: '100vh' }}>
               {/* Scrollable form content */}
               <Box
                 p={4}
@@ -287,23 +288,6 @@ const UserRegistration = () => {
                         },
                       );
                       setOpenAlert(true);
-                      //   setTimeout(() => navigate('/FixidiLandingPage'), 2000);
-                      /*  .then(setTimeout(() => navigate('/FixidiLandingPage'), 2000);)
-                        .then((res) => res.json())
-                        .then((data) => {
-                          setTimeout(() => navigate('/FixidiLandingPage'), 2000);
-                          console.log(data);
-                        })
-                        .catch((err) => console.error(err)); */
-                      /*    const result = await response.json();
-                      console.log(result); */
-
-                      /*   if (result.status === 'success') {
-                        setOpenAlert(true);
-                        setTimeout(() => navigate('/FixidiLandingPage'), 2000);
-                      } else {
-                        console.error('Submission failed:', result.message);
-                      } */
                     } catch (error) {
                       console.error('Error while submitting user:', error);
                     } finally {
@@ -385,6 +369,11 @@ const UserRegistration = () => {
                                 onBlur={handleBlur}
                                 error={touched.firstName && Boolean(errors.firstName)}
                                 helperText={touched.firstName && errors.firstName}
+                                sx={{
+                                  '& input': {
+                                    fontSize: { xs: '16px', sm: '14px' }, // prevents iOS zoom
+                                  },
+                                }}
                               />
                             </Grid>
                             <Grid
@@ -405,6 +394,11 @@ const UserRegistration = () => {
                                 onBlur={handleBlur}
                                 error={touched.lastName && Boolean(errors.lastName)}
                                 helperText={touched.lastName && errors.lastName}
+                                sx={{
+                                  '& input': {
+                                    fontSize: { xs: '16px', sm: '14px' }, // prevents iOS zoom
+                                  },
+                                }}
                               />
                             </Grid>
                             <Grid
@@ -425,6 +419,11 @@ const UserRegistration = () => {
                                 onBlur={handleBlur}
                                 error={touched.email && Boolean(errors.email)}
                                 helperText={touched.email && errors.email}
+                                sx={{
+                                  '& input': {
+                                    fontSize: { xs: '16px', sm: '14px' }, // prevents iOS zoom
+                                  },
+                                }}
                               />
                             </Grid>
                             <Grid
@@ -446,6 +445,11 @@ const UserRegistration = () => {
                                 fullWidth
                                 error={touched.phoneNumber && Boolean(errors.phoneNumber)}
                                 helperText={touched.phoneNumber && errors.phoneNumber}
+                                sx={{
+                                  '& input': {
+                                    fontSize: { xs: '16px', sm: '14px' }, // prevents iOS zoom
+                                  },
+                                }}
                               />
                             </Grid>
 
@@ -485,6 +489,11 @@ const UserRegistration = () => {
                                     onBlur={handleBlur}
                                     error={touched.city && Boolean(errors.city)}
                                     helperText={touched.city && errors.city}
+                                    sx={{
+                                      '& input': {
+                                        fontSize: { xs: '16px', sm: '14px' }, // prevents iOS zoom
+                                      },
+                                    }}
                                   />
                                 )}
                               />
@@ -509,6 +518,11 @@ const UserRegistration = () => {
                                   onBlur={handleBlur}
                                   error={touched.postalCode && Boolean(errors.postalCode)}
                                   helperText={touched.postalCode && errors.postalCode}
+                                  sx={{
+                                    '& input': {
+                                      fontSize: { xs: '16px', sm: '14px' }, // prevents iOS zoom
+                                    },
+                                  }}
                                 />
                               </Grid>
                             )}
@@ -532,6 +546,11 @@ const UserRegistration = () => {
                                   onBlur={handleBlur}
                                   error={touched.areaLine && Boolean(errors.areaLine)}
                                   helperText={touched.areaLine && errors.areaLine}
+                                  sx={{
+                                    '& input': {
+                                      fontSize: { xs: '16px', sm: '14px' }, // prevents iOS zoom
+                                    },
+                                  }}
                                 />
                               </Grid>
                             )}
@@ -586,6 +605,11 @@ const UserRegistration = () => {
                                           ? 'Coverage area is required'
                                           : '')
                                       }
+                                      sx={{
+                                        '& input': {
+                                          fontSize: { xs: '16px', sm: '14px' }, // prevents iOS zoom
+                                        },
+                                      }}
                                     />
                                   )}
                                 />
@@ -687,6 +711,11 @@ const UserRegistration = () => {
                                                   ) &&
                                                   getIn(errors, `expertiseList[${index}].expertise`)
                                                 }
+                                                sx={{
+                                                  '& input': {
+                                                    fontSize: { xs: '16px', sm: '14px' }, // prevents iOS zoom
+                                                  },
+                                                }}
                                               />
                                             )}
                                           />
@@ -736,6 +765,11 @@ const UserRegistration = () => {
                                                 ) &&
                                                 getIn(errors, `expertiseList[${index}].expertise`)
                                               }
+                                              sx={{
+                                                '& input': {
+                                                  fontSize: { xs: '16px', sm: '14px' }, // prevents iOS zoom
+                                                },
+                                              }}
                                             />
                                           </Grid>
                                         )}
@@ -874,6 +908,11 @@ const UserRegistration = () => {
                                               value={item.comments}
                                               onChange={handleChange}
                                               onBlur={handleBlur}
+                                              sx={{
+                                                '& input': {
+                                                  fontSize: { xs: '16px', sm: '14px' }, // prevents iOS zoom
+                                                },
+                                              }}
                                             />
                                           </Grid>
                                         )}
@@ -961,6 +1000,9 @@ const UserRegistration = () => {
                   borderTop: '1px solid #ccc',
                   backgroundColor: '#fff',
                   textAlign: 'center',
+                  position: { xs: 'sticky', sm: 'relative' }, // sticky on mobile
+                  bottom: 0,
+                  zIndex: 10,
                 }}
               >
                 {' '}
@@ -992,26 +1034,3 @@ const canadaAreas = [
   { title: 'Winnipeg' },
   { title: 'Halifax' },
 ];
-
-/* const canadaCityAreas = [
-  { title: 'Downtown' },
-  { title: 'Scarborough' },
-  { title: 'Richmond Hill' },
-  { title: 'North York' },
-  { title: 'Etobicoke' },
-  { title: 'Markham' },
-  { title: 'Mississauga' },
-  { title: 'Brampton' },
-  { title: 'York' },
-  { title: 'East York' },
-  { title: 'Vaughan' },
-  { title: 'Thornhill' },
-  { title: 'Pickering' },
-  { title: 'Ajax' },
-  { title: 'Whitby' },
-  { title: 'Oshawa' },
-  { title: 'Milton' },
-  { title: 'Oakville' },
-  { title: 'Burlington' },
-  { title: 'Newmarket' },
-]; */
