@@ -5,6 +5,9 @@ import { createBrowserRouter, Navigate } from 'react-router';
 import Loadable from '../layouts/full/shared/loadable/Loadable';
 import UserRegistration from 'src/components/Administration/UserRegistration';
 import AllServices from 'src/components/Administration/AllServices';
+import CancellationAndRefundPolicy from 'src/components/Administration/PolicyPages/CancellationAndRefundPolicy';
+import PrivacyPolicy from 'src/components/Administration/PolicyPages/PrivacyPolicy';
+import TermsOfService from 'src/components/Administration/PolicyPages/TermsOfService';
 
 /* const Login = Loadable(lazy(() => import('../views/authentication/auth1/Login'))); */
 /* ***Layouts**** */
@@ -321,6 +324,18 @@ const router = createBrowserRouter ([
 {
   path: '/all-services',
   element: <AllServices />
+},
+{
+  path:"/cancellation-and-refund-policy",
+   element:<CancellationAndRefundPolicy />
+},
+{
+  path:"/privacy-policy",
+   element:<PrivacyPolicy />
+},
+{
+  path:"/terms-and-conditions",
+   element:<TermsOfService />
 },
  {
     path: '*',

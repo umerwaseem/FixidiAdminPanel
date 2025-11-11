@@ -35,16 +35,16 @@ const footerLinks = [
       { title: true, titleText: 'Quick Links' },
       { title: false, titleText: 'Home', link: '#' },
       { title: false, titleText: 'Services', link: '#' },
-      { title: false, titleText: 'FAQs', link: '#' },
+      { title: false, titleText: 'FAQs',link: '/#faq' },
     ],
   },
   {
     id: 3,
     children: [
       { title: true, titleText: 'Policy Links' },
-      { title: false, titleText: 'Privacy Policy', link: '#' },
-      { title: false, titleText: 'Terms & Conditions', link: '#' },
-      { title: false, titleText: 'Cancellation & Refund Policy', link: '#' },
+      { title: false, titleText: 'Privacy Policy', link: '/privacy-policy' },
+      { title: false, titleText: 'Terms & Conditions', link: '/terms-and-conditions' },
+      { title: false, titleText: 'Cancellation & Refund Policy', link: '/cancellation-and-refund-policy'  },
     ],
   },
 ];
@@ -180,7 +180,7 @@ const Footer = () => {
                 },
               }}
             >
-              Follow Us 💙
+              Follow Us 
             </Typography>
             <Stack direction="row" spacing={2} justifyContent={{ xs: 'center', md: 'flex-start' }}>
               {[

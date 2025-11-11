@@ -144,7 +144,7 @@ const UserRegistration = () => {
   });
   return (
     <>
-      <PageContainer title="Login" description="this is Login page">
+      <PageContainer >
         <Grid container spacing={0} sx={{ overflowX: 'hidden' }}>
           <Grid
             sx={{

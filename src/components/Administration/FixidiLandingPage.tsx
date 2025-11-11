@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Box,
   Typography,
@@ -31,6 +31,7 @@ import ScrollToTop from '../frontend-pages/shared/scroll-to-top';
 import { useNavigate } from 'react-router';
 import FeaturesTitle from '../landingpage/features/FeaturesTitle';
 import HowItWorksContainer from './HowItWorksContainer';
+import { FAQCarousel } from './FaqSection';
 
 const Frameworks = [
   {
@@ -156,20 +157,20 @@ const FixidiLandingPage = () => {
 
     navigate('/user-registration', { state: dataToSend });
   };
-
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 300); // slight delay ensures rendering complete
+      }
+    }
+  }, [location]);
   return (
     <>
-      <HpHeader
-      /* // showProfessionalButton={true}
-        onProfessionalClick={() =>
-          navigate('/user-registration', {
-            state: {
-              username: 'JohnDoe',
-              userType: 'professional',
-              serviceType: '',
-            },
-          })
-        } */
+      <HpHeader showProButton={true}
+
       />
       <Box py={{ xs: 6, md: 10 }}>
         <Container maxWidth="lg">
@@ -479,6 +480,10 @@ const FixidiLandingPage = () => {
       </Box>
 
       <HowItWorksContainer />
+      <section id="faq">
+
+      <FAQCarousel />
+      </section>
       <Footer />
       <ScrollToTop />
     </>

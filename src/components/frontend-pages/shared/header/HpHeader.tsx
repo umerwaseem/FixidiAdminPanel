@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 import Logo from '../../../../layouts/full/shared/logo/Logo';
 import { useNavigate } from 'react-router';
 
-const HpHeader: React.FC = () => {
+const HpHeader: React.FC<{ showProButton?: boolean }> = ({ showProButton = true }) => {
   const navigate = useNavigate();
 
   const AppBarStyled = styled(AppBar)(({ theme }) => ({
@@ -57,9 +57,11 @@ const HpHeader: React.FC = () => {
       <Container maxWidth="lg">
         <ToolbarStyled>
           <Logo />
-          <StyledButton variant="contained" onClick={onProfessionalClickk}>
-            Start as a Pro
-          </StyledButton>
+            {showProButton && (
+            <StyledButton variant="contained" onClick={onProfessionalClickk}>
+              Start as a Pro
+            </StyledButton>
+          )}
         </ToolbarStyled>
       </Container>
     </AppBarStyled>
