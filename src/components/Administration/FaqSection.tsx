@@ -120,7 +120,7 @@ const faqData = [
   },
 ];
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 7;
 
 export const FAQCarousel = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -314,7 +314,7 @@ export const FAQCarousel = () => {
         Showing questions {currentPage * ITEMS_PER_PAGE + 1}-
         {Math.min((currentPage + 1) * ITEMS_PER_PAGE, faqData.length)} of {faqData.length}
       </Typography>
-      ;
+      
       <Grid container justifyContent="center">
         <Grid size={{ xs: 12, lg: 5 }} display="flex" justifyContent="center">
           <Box

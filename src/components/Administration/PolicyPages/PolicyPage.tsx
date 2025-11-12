@@ -73,20 +73,19 @@ const PolicyPage: React.FC<PolicyPageProps> = ({
                   color="text.secondary"
                   mb={4}
                 >
-                  Effective Date: {effectiveDate} | Last Updated: {lastUpdated}
+                  <b>Effective Date:</b> {effectiveDate} | <b>Last Updated:</b> {lastUpdated}
                 </Typography>
               )}
- {mainContent && (
-                <Typography
-                  variant="body1"
-                  textAlign="justify"
-                  color="text.primary"
-                  mb={2}
-                  sx={{ fontWeight: 500 }}
-                >
-                  {mainContent}
-                </Typography>
-              )}
+{mainContent && (
+  <Typography
+    variant="body1"
+    textAlign="justify"
+    color="text.primary"
+    mb={2}
+    sx={{ fontWeight: 500 }}
+    dangerouslySetInnerHTML={{ __html: mainContent }}
+  />
+)}
 
               {/* Content Description */}
               {contentDescription && (
@@ -119,11 +118,17 @@ const Section: React.FC<{ title: string; content: string[] }> = ({ title, conten
       {title}
     </Typography>
     {content.map((text, index) => (
-      <Typography key={index} variant="body1" color="text.secondary" paragraph   sx={{ textAlign: "justify" }} >
-        {text}
-      </Typography>
+      <Typography
+        key={index}
+        variant="body1"
+        color="text.secondary"
+        paragraph
+        sx={{ textAlign: "left" }}
+        dangerouslySetInnerHTML={{ __html: text }}
+      />
     ))}
   </Box>
 );
+
 
 export default PolicyPage;
