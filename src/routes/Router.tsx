@@ -1,14 +1,22 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import React, { lazy } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate } from 'react-router';
 import Loadable from '../layouts/full/shared/loadable/Loadable';
-import UserRegistration from 'src/components/Administration/UserRegistration';
+import Spinner from 'src/views/spinner/Spinner';
+/* import UserRegistration from 'src/components/Administration/UserRegistration';
 import AllServices from 'src/components/Administration/AllServices';
 import CancellationAndRefundPolicy from 'src/components/Administration/PolicyPages/CancellationAndRefundPolicy';
 import PrivacyPolicy from 'src/components/Administration/PolicyPages/PrivacyPolicy';
-import TermsOfService from 'src/components/Administration/PolicyPages/TermsOfService';
+import TermsOfService from 'src/components/Administration/PolicyPages/TermsOfService'; */
 
+
+
+const UserRegistration = lazy(() => import("src/components/Administration/UserRegistration"));
+const AllServices = lazy(() => import("src/components/Administration/AllServices"));
+const CancellationAndRefundPolicy = lazy(() => import("src/components/Administration/PolicyPages/CancellationAndRefundPolicy"));
+const PrivacyPolicy = lazy(() => import("src/components/Administration/PolicyPages/PrivacyPolicy"));
+const TermsOfService = lazy(() => import("src/components/Administration/PolicyPages/TermsOfService"));
 /* const Login = Loadable(lazy(() => import('../views/authentication/auth1/Login'))); */
 /* ***Layouts**** */
 //const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
@@ -317,7 +325,7 @@ const router = createBrowserRouter ([
   path: '/auth/login',
   element: <Login />
 }, */
-{
+/* {
   path: '/user-registration',
   element: <UserRegistration />
 },
@@ -340,7 +348,52 @@ const router = createBrowserRouter ([
  {
     path: '*',
     element: <Navigate to="/" replace />, // redirect unknown routes to home
-  },
+  }, */
+
+  {
+  path: '/user-registration',
+  element: (
+    <Suspense fallback={<Spinner />}>
+      <UserRegistration />
+    </Suspense>
+  )
+},
+{
+  path: '/all-services',
+  element: (
+    <Suspense fallback={<Spinner />}>
+      <AllServices />
+    </Suspense>
+  )
+},
+{
+  path: "/cancellation-and-refund-policy",
+  element: (
+    <Suspense fallback={<Spinner />}>
+      <CancellationAndRefundPolicy />
+    </Suspense>
+  )
+},
+{
+  path: "/privacy-policy",
+  element: (
+    <Suspense fallback={<Spinner />}>
+      <PrivacyPolicy />
+    </Suspense>
+  )
+},
+{
+  path: "/terms-and-conditions",
+  element: (
+    <Suspense fallback={<Spinner />}>
+      <TermsOfService />
+    </Suspense>
+  )
+},
+{
+  path: '*',
+  element: <Navigate to="/" replace />,
+},
 ]);
 //const router = createBrowserRouter(Router);
 
