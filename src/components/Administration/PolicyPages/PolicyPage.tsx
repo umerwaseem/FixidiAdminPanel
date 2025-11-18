@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Typography, Box, Divider, Paper } from "@mui/material";
-import { motion } from "framer-motion";
 import HpHeader from "../../frontend-pages/shared/header/HpHeader";
 
 interface Section {
@@ -38,11 +37,7 @@ const PolicyPage: React.FC<PolicyPageProps> = ({
         }}
       >
         <Container maxWidth="md">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+         
             <Paper
               elevation={3}
               sx={{
@@ -105,7 +100,7 @@ const PolicyPage: React.FC<PolicyPageProps> = ({
                 <Section key={index} title={section.title} content={section.content} />
               ))}
             </Paper>
-          </motion.div>
+          
         </Container>
       </Box>
     </>

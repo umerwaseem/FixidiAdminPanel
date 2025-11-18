@@ -45,7 +45,7 @@ theme.components = {
         WebkitTapHighlightColor: 'transparent',
         WebkitTextSizeAdjust: '100%',
         msTextSizeAdjust: '100%',
-        '-webkit-touch-callout': 'none',
+        WebkitTouchCallout: 'none',
       },
       '*': {
         WebkitTapHighlightColor: 'transparent',

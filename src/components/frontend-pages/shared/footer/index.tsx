@@ -117,37 +117,39 @@ const Footer = () => {
                     {child.titleText}
                   </Typography>
                 ) : (
-                  <Typography
-                    key={i}
-                    component="a"
-                    href={child.link}
-                    sx={{
-                      display: 'block',
-                      fontSize: '15px',
-                      lineHeight: 2,
-                      color: 'text.secondary',
-                      textDecoration: 'none',
-                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                      position: 'relative',
-                      paddingLeft: { xs: 0, md: '12px' },
-                      '&::before': {
-                        content: '"→"',
-                        position: 'absolute',
-                        left: 0,
-                        opacity: 0,
-                        transition: 'opacity 0.3s ease',
-                        color: 'primary.main',
-                        display: { xs: 'none', md: 'block' },
-                      },
-                      '&:hover': {
-                        color: 'primary.main',
-                        paddingLeft: { md: '20px' },
-                        '&::before': {
-                          opacity: 1,
-                        },
-                      },
-                    }}
-                  >
+                 <Typography
+  key={i}
+  component="a"
+  href={child.link}
+  sx={{
+    display: 'block',
+    fontSize: '15px',
+    lineHeight: 2,
+    color: 'text.secondary',
+    textDecoration: 'none',
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    position: 'relative',
+    paddingLeft: { xs: 0, md: '12px' },
+    '&::before': {
+      content: '"→"',
+      position: 'absolute',
+      left: 0,
+      opacity: 0,
+      transition: 'opacity 0.3s ease',
+      color: 'primary.main',
+      display: { xs: 'none', md: 'block' },
+    },
+    '@media (hover: hover) and (pointer: fine)': {
+      '&:hover': {
+        color: 'primary.main',
+        paddingLeft: { md: '20px' },
+        '&::before': {
+          opacity: 1,
+        },
+      },
+    },
+  }}
+>
                     {child.titleText}
                   </Typography>
                 ),
@@ -188,31 +190,31 @@ const Footer = () => {
               ].map((social, idx) => (
                 <Tooltip title={social.label} key={idx}>
                   <IconButton
-                    component={NavLink}
-                    to="#"
-                    sx={{
-                      width: 48,
-                      height: 48,
-                      borderRadius: '50%',
-                      background: 'linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%)',
-                      border: '2px solid',
-                      borderColor: 'grey.200',
-                      transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                      '&:hover': {
-                        background: 'linear-gradient(135deg, #1a97f5 0%, #26c6da 100%)',
-                        borderColor: 'primary.main',
-                        transform: 'translateY(-4px) rotate(5deg)',
-                        boxShadow: '0 8px 20px rgba(26,151,245,0.3)',
-                        '& img': { 
-                          filter: 'brightness(0) invert(1)',
-                          transform: 'scale(1.1)',
-                        },
-                      },
-                      '& img': {
-                        transition: 'all 0.3s ease',
-                      },
-                    }}
-                  >
+  component={NavLink}
+  to="#"
+  sx={{
+    width: 48,
+    height: 48,
+    borderRadius: '50%',
+    background: 'linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%)',
+    border: '2px solid',
+    borderColor: 'grey.200',
+    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+    '& img': { transition: 'all 0.3s ease' },
+    '@media (hover: hover) and (pointer: fine)': {
+      '&:hover': {
+        background: 'linear-gradient(135deg, #1a97f5 0%, #26c6da 100%)',
+        borderColor: 'primary.main',
+        transform: 'translateY(-4px) rotate(5deg)',
+        boxShadow: '0 8px 20px rgba(26,151,245,0.3)',
+        '& img': {
+          filter: 'brightness(0) invert(1)',
+          transform: 'scale(1.1)',
+        },
+      },
+    },
+  }}
+>
                     <img src={social.icon} alt={social.label} width={22} height={22} />
                   </IconButton>
                 </Tooltip>

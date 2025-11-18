@@ -198,7 +198,7 @@ const UserRegistration = () => {
           <Grid
             display="flex"
             justifyContent="center"
-            alignItems="center"
+            alignItems={{ xs: 'flex-start', lg: 'center' }}
             size={{
               xs: 12,
               sm: 12,

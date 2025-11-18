@@ -30,7 +30,7 @@ const Logo: FC = () => {
 
   const logoStyle = {
     width: customizer.isCollapse ? '40px' : '120px', // control image size
-    height: '30px', // maintain aspect ratio
+    height: '60px', // maintain aspect ratio
   };
 
   if (customizer.activeDir === 'ltr') {
